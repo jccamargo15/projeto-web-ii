@@ -7,7 +7,7 @@
     em 11/10/18 -->
 
     <!-- Titulo e Icone - HEAD -->
-    <title>Projeto Web 2</title>
+    <title>Projeto Programação Web 2</title>
 
     <link rel="shortcut icon" href="images/icon.png" type="image/x-icon">
 

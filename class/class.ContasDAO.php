@@ -1,11 +1,15 @@
 <?php 
 
-require_once '../class/class.DbAdmin.php';
+include($_SERVER['DOCUMENT_ROOT']."/projeto-web2/inc/class.DbAdmin.php");
+//require_once '../inc/class.DbAdmin.php';
+//include($_SERVER['DOCUMENT_ROOT']."/projeto-web2/class/class.Contas.php");
 require_once 'class.Contas.php';
 
 /**
  * criado por José Carlos de camargo
  * em 04/10/2018
+ * alterado por Jocemar Flores
+ * em 14/10/2018
  */
 class ContasDAO
 {
@@ -41,11 +45,11 @@ class ContasDAO
 	{
 		$dba = $this->dba;
 
-		$query = 'SELECT * FROM contas';
+		$query = 'SELECT * FROM contas ORDER BY nome';
 
 		$res = $dba->query($query);
 
-		$num = $dba->rows($res);
+		$num = $dba->linhas_consulta($res);
 
 		for ($i=0; $i<$num; $i++) { 
 			$idc = $dba->result($res, $i, 'id');
@@ -61,28 +65,30 @@ class ContasDAO
 		return $ver;
 	}
 
-	public function listaUm($con)
+	public function listaUm($idc)
 	{
 		$dba = $this->dba;
 
-		$idc = $con->getId();
+		//$idc = $con->getId();
 
 		$query = 'SELECT * FROM contas WHERE id = '.$idc;
 
 		$res = $dba->query($query);
 
-		$num = $dba->rows($res);
+		$num = $dba->linhas_consulta($res);
 
-		for ($i=0; $i<=$num; $i++) { 
-			$idc = $dba->result($res, $i, 'id');
-			$nom = $dba->result($res, $i, 'nome');
+
+
+		//for ($i=0; $i<=$num; $i++) { 
+			$idc = $dba->result($res, 0, 'id');
+			$nom = $dba->result($res, 0, 'nome');
 
 			$con = new Contas();
 			$con->setId($idc);
 			$con->setNome($nom);
 
 			$ver[] = $con;
-		}
+		//}
 
 		return $ver;
 	}
@@ -113,7 +119,7 @@ class ContasDAO
 		$nome 		= $con->getNome();
 
 		//cria comando SQL
-		$query = 'UPDATE FROM contas SET nome="'.$nome.'" WHERE id = "'.$idc.'"';
+		$query = 'UPDATE contas SET nome="'.$nome.'" WHERE id = "'.$idc.'"';
 
 		//executar comando SQL
 		$dba->query($query);

@@ -1,17 +1,20 @@
-<?php 
-
-require_once '../class/class.DbAdmin.php';
-require_once 'class.CentroCustos.php;'
-
-/**
+ <!--
  * criado por José Carlos de camargo
  * em 04/10/2018
- */
+ * alterado por Jocemar Flores
+ * em 14/10/2018
+ -->
+
+<?php 
+include($_SERVER['DOCUMENT_ROOT']."/projeto-web2/inc/class.DbAdmin.php");
+//require_once '../class/class.DbAdmin.php';
+require_once 'class.CentroCustos.php';
+
 class CentroCustosDAO
 {
 	private $dba;
 
-	public function ContasDAO()
+	public function CentroCustosDAO()
 	{
 		$dba = new DbAdmin('mysql');
 		$dba->connect('localhost', 'root', '', 'contas');
@@ -41,11 +44,11 @@ class CentroCustosDAO
 	{
 		$dba = $this->dba;
 
-		$query = 'SELECT * FROM centro_custos';
+		$query = 'SELECT * FROM centro_custos ORDER BY nome';
 
 		$res = $dba->query($query);
 
-		$num = $dba->rows($res);
+		$num = $dba->linhas_consulta($res);
 
 		for ($i=0; $i<$num; $i++) { 
 			$idc = $dba->result($res, $i, 'id');
@@ -61,28 +64,28 @@ class CentroCustosDAO
 		return $ver;
 	}
 
-	public function listaUm($cen)
+	public function listaUm($idc)
 	{
 		$dba = $this->dba;
 
-		$idc = $cen->getId();
+		//$idc = $cen->getId();
 
 		$query = 'SELECT * FROM centro_custos WHERE id = '.$idc;
 
 		$res = $dba->query($query);
 
-		$num = $dba->rows($res);
+		$num = $dba->linhas_consulta($res);
 
-		for ($i=0; $i<=$num; $i++) { 
-			$idc = $dba->result($res, $i, 'id');
-			$nom = $dba->result($res, $i, 'nome');
+		//for ($i=0; $i<=$num; $i++) { 
+			$idc = $dba->result($res, 0, 'id');
+			$nom = $dba->result($res, 0, 'nome');
 
 			$cen = new CentroCustos();
 			$cen->setId($idc);
 			$cen->setNome($nom);
 
 			$ver[] = $cen;
-		}
+		//}
 
 		return $ver;
 	}
@@ -113,7 +116,7 @@ class CentroCustosDAO
 		$nome 		= $cen->getNome();
 
 		//cria comando SQL
-		$query = 'UPDATE FROM centro_custos SET nome="'.$nome.'" WHERE id = "'.$idc.'"';
+		$query = 'UPDATE centro_custos SET nome="'.$nome.'" WHERE id = "'.$idc.'"';
 
 		//executar comando SQL
 		$dba->query($query);

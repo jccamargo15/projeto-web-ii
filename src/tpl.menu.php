@@ -10,10 +10,14 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="?page=cadastro">
+        <a class="nav-link" href="">
           <span data-feather="file"></span>
           Cadastro
         </a>
+        <ul>
+           <li><a class="nav-link" href="?page=cadastro_conta">Contas</a></li>
+           <li><a class="nav-link" href="?page=cadastro_categoria">Categorias</a></li>
+        </ul>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="?page=movimentacao">

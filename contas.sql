@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Tempo de geração: 14/09/2018 às 21:50
--- Versão do servidor: 10.1.31-MariaDB
--- Versão do PHP: 5.6.35
+-- Host: 127.0.0.1
+-- Generation Time: 14-Out-2018 às 22:33
+-- Versão do servidor: 10.1.30-MariaDB
+-- PHP Version: 5.6.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `contas`
+-- Database: `contas`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `centro_custos`
+-- Estrutura da tabela `centro_custos`
 --
 
 CREATE TABLE `centro_custos` (
@@ -33,10 +33,18 @@ CREATE TABLE `centro_custos` (
   `nome` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Extraindo dados da tabela `centro_custos`
+--
+
+INSERT INTO `centro_custos` (`id`, `nome`) VALUES
+(2, 'Moradia'),
+(3, 'CombustÃ­vel');
+
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `contas`
+-- Estrutura da tabela `contas`
 --
 
 CREATE TABLE `contas` (
@@ -44,10 +52,18 @@ CREATE TABLE `contas` (
   `nome` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Extraindo dados da tabela `contas`
+--
+
+INSERT INTO `contas` (`id`, `nome`) VALUES
+(1, 'Carteira'),
+(2, 'Banrisul');
+
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `item`
+-- Estrutura da tabela `item`
 --
 
 CREATE TABLE `item` (
@@ -58,7 +74,7 @@ CREATE TABLE `item` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `movimentacao`
+-- Estrutura da tabela `movimentacao`
 --
 
 CREATE TABLE `movimentacao` (
@@ -74,7 +90,7 @@ CREATE TABLE `movimentacao` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `parcelas`
+-- Estrutura da tabela `parcelas`
 --
 
 CREATE TABLE `parcelas` (
@@ -92,7 +108,7 @@ CREATE TABLE `parcelas` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `recorrentes`
+-- Estrutura da tabela `recorrentes`
 --
 
 CREATE TABLE `recorrentes` (
@@ -108,7 +124,7 @@ CREATE TABLE `recorrentes` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `recorrentes_movimentacao`
+-- Estrutura da tabela `recorrentes_movimentacao`
 --
 
 CREATE TABLE `recorrentes_movimentacao` (
@@ -117,126 +133,84 @@ CREATE TABLE `recorrentes_movimentacao` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Índices de tabelas apagadas
+-- Indexes for dumped tables
 --
 
 --
--- Índices de tabela `centro_custos`
+-- Indexes for table `centro_custos`
 --
 ALTER TABLE `centro_custos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `contas`
+-- Indexes for table `contas`
 --
 ALTER TABLE `contas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `item`
+-- Indexes for table `item`
 --
 ALTER TABLE `item`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `movimentacao`
+-- Indexes for table `movimentacao`
 --
 ALTER TABLE `movimentacao`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_movimentacao_centro_custos_idx` (`id_centro_custos`),
-  ADD KEY `fk_movimentacao_contas1_idx` (`id_conta`);
+  ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `parcelas`
+-- Indexes for table `parcelas`
 --
 ALTER TABLE `parcelas`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_parcelas_contas1_idx` (`id_conta`),
-  ADD KEY `fk_parcelas_centro_custos1_idx` (`id_centro_custos`),
-  ADD KEY `fk_parcelas_item1_idx` (`id_item`);
+  ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `recorrentes`
+-- Indexes for table `recorrentes`
 --
 ALTER TABLE `recorrentes`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_recorrentes_centro_custos1_idx` (`id_centro_custos`),
-  ADD KEY `fk_recorrentes_contas1_idx` (`id_conta`);
+  ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `recorrentes_movimentacao`
---
-ALTER TABLE `recorrentes_movimentacao`
-  ADD PRIMARY KEY (`id_recorrentes`,`id_movimentacao`),
-  ADD KEY `fk_recorrentes_has_movimentacao_movimentacao1_idx` (`id_movimentacao`),
-  ADD KEY `fk_recorrentes_has_movimentacao_recorrentes1_idx` (`id_recorrentes`);
-
---
--- AUTO_INCREMENT de tabelas apagadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de tabela `centro_custos`
+-- AUTO_INCREMENT for table `centro_custos`
 --
 ALTER TABLE `centro_custos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT de tabela `contas`
+-- AUTO_INCREMENT for table `contas`
 --
 ALTER TABLE `contas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT de tabela `movimentacao`
+-- AUTO_INCREMENT for table `item`
+--
+ALTER TABLE `item`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `movimentacao`
 --
 ALTER TABLE `movimentacao`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `parcelas`
+-- AUTO_INCREMENT for table `parcelas`
 --
 ALTER TABLE `parcelas`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `recorrentes`
+-- AUTO_INCREMENT for table `recorrentes`
 --
 ALTER TABLE `recorrentes`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- Restrições para dumps de tabelas
---
-
---
--- Restrições para tabelas `movimentacao`
---
-ALTER TABLE `movimentacao`
-  ADD CONSTRAINT `fk_movimentacao_centro_custos` FOREIGN KEY (`id_centro_custos`) REFERENCES `centro_custos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_movimentacao_contas1` FOREIGN KEY (`id_conta`) REFERENCES `contas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Restrições para tabelas `parcelas`
---
-ALTER TABLE `parcelas`
-  ADD CONSTRAINT `fk_parcelas_centro_custos1` FOREIGN KEY (`id_centro_custos`) REFERENCES `centro_custos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_parcelas_contas1` FOREIGN KEY (`id_conta`) REFERENCES `contas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_parcelas_item1` FOREIGN KEY (`id_item`) REFERENCES `item` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Restrições para tabelas `recorrentes`
---
-ALTER TABLE `recorrentes`
-  ADD CONSTRAINT `fk_recorrentes_centro_custos1` FOREIGN KEY (`id_centro_custos`) REFERENCES `centro_custos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_recorrentes_contas1` FOREIGN KEY (`id_conta`) REFERENCES `contas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Restrições para tabelas `recorrentes_movimentacao`
---
-ALTER TABLE `recorrentes_movimentacao`
-  ADD CONSTRAINT `fk_recorrentes_has_movimentacao_movimentacao1` FOREIGN KEY (`id_movimentacao`) REFERENCES `movimentacao` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_recorrentes_has_movimentacao_recorrentes1` FOREIGN KEY (`id_recorrentes`) REFERENCES `recorrentes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

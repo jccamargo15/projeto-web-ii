@@ -1,9 +1,10 @@
 <?php
 	/*
 	* Classe criada por José Camargo em 04/10/2018
+	* Classe atualizada por Jocemar Flores em 21/10/2018
 	*/
 
-	require_once('../inc/class.DbAdmin.php');
+	include($_SERVER['DOCUMENT_ROOT']."/projeto-web2/inc/class.DbAdmin.php");
 	require_once('class.Item.php');
 
 
@@ -62,8 +63,8 @@
 			$descricao = $item->getDescricao();
 			
 			//cria comando sql
-			$query = 'UPDATE FROM item 
-						SET  descricao = "'.$descricao.'",
+			$query = 'UPDATE item 
+						SET  descricao = "'.$descricao.'"
 						WHERE id = "'.$id.'"';
 
 			//executar comando sql
@@ -78,7 +79,7 @@
 
 			$res = $dba->query($query);
 
-			$num = $dba->rows($res);
+			$num = $dba->linhas_consulta($res);
 
 			for($i=0; $i<$num; $i++){
 
@@ -97,6 +98,33 @@
 			return $vet;
 
 		}
+
+		public function listaUm($idc){
+				$dba = $this->dba;
+
+				//$idc = $con->getId();
+
+				$query = 'SELECT * FROM item WHERE id = '.$idc;
+
+				$res = $dba->query($query);
+
+				$num = $dba->linhas_consulta($res);
+
+
+
+				//for ($i=0; $i<=$num; $i++) { 
+					$idc = $dba->result($res, 0, 'id');
+					$nom = $dba->result($res, 0, 'descricao');
+
+					$con = new Item();
+					$con->setId($idc);
+					$con->setDescricao($nom);
+
+					$ver[] = $con;
+				//}
+
+				return $ver;
+			}
 
 }
 

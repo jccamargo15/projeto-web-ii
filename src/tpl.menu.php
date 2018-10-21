@@ -17,6 +17,7 @@
         <ul>
            <li><a class="nav-link" href="?page=cadastro_conta">Contas</a></li>
            <li><a class="nav-link" href="?page=cadastro_categoria">Categorias</a></li>
+           <li><a class="nav-link" href="?page=cadastro_item">Item</a></li>
         </ul>
       </li>
       <li class="nav-item">

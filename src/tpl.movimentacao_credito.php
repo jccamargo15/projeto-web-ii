@@ -1,4 +1,5 @@
-<!-- criado por Jocemar Filho em 21/10/18 -->
+<!-- criado por Jocemar Filho em 21/10/18 
+-->
 <?php
   include_once('class/class.Movimentacao.php');
   include_once('class/class.MovimentacaoDAO.php');

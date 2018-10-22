@@ -1,6 +1,7 @@
 <!-- criado por Jocemar Flores em 14/10/18
 	 atualizado por Jocemar Flores em 21/10/18
  -->
+ 
 <?php 
 
 include_once($_SERVER['DOCUMENT_ROOT']."/projeto-web2/inc/class.DbAdmin.php");

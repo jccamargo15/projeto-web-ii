@@ -3,7 +3,6 @@
 	* Classe criada por José Camargo em 04/10/2018
 	* Classe atualizada por Jocemar Flores em 21/10/2018
 	*/
-
 	include_once($_SERVER['DOCUMENT_ROOT']."/projeto-web2/inc/class.DbAdmin.php");
 	require_once('class.Item.php');
 

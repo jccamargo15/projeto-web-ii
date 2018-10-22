@@ -1,6 +1,7 @@
 <!-- criado por José Camargo em 04/10/18 
      atualizado por Jocemar Flores em 11/10/18
-     atualizado por Jocemar Flores em 21/10/18 -->
+     atualizado por Jocemar Flores em 21/10/18 
+   -->
 <nav class="col-md-2 d-none d-md-block bg-light sidebar">
   <div class="sidebar-sticky">
     <ul class="nav flex-column">

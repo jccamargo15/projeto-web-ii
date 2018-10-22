@@ -1,8 +1,6 @@
 <!-- criado por Jocemar Flores em 14/10/18
-	
 	 atualizado por Jocemar Flores em 21/10/18
  -->
-
 <?php
 	
 	require_once('../class/class.Movimentacao.php');

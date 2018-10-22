@@ -1,6 +1,6 @@
 <?php 
 
-include($_SERVER['DOCUMENT_ROOT']."/projeto-web2/inc/class.DbAdmin.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/projeto-web2/inc/class.DbAdmin.php");
 //require_once '../inc/class.DbAdmin.php';
 //include($_SERVER['DOCUMENT_ROOT']."/projeto-web2/class/class.Contas.php");
 require_once 'class.Contas.php';

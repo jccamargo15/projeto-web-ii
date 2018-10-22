@@ -4,7 +4,7 @@
 	* Classe atualizada por Jocemar Flores em 21/10/2018
 	*/
 
-	include($_SERVER['DOCUMENT_ROOT']."/projeto-web2/inc/class.DbAdmin.php");
+	include_once($_SERVER['DOCUMENT_ROOT']."/projeto-web2/inc/class.DbAdmin.php");
 	require_once('class.Item.php');
 
 

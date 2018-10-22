@@ -2,6 +2,11 @@
 <html lang="en">
   <head>
 
+    <?php
+      include_once($_SERVER['DOCUMENT_ROOT']."/projeto-web2/inc/class.DbAdmin.php");
+
+    ?>
+
     <meta charset="UTF-8">
 
     <!-- editado por José Carlos

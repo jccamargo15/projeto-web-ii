@@ -17,7 +17,7 @@
 include_once($_SERVER['DOCUMENT_ROOT']."/projeto-web2/inc/class.DbAdmin.php");
 //require_once '../class/class.DbAdmin.php';
 require_once 'class.CentroCustos.php';
-require_once '../inc/config.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/projeto-web2/inc/config.php';
 
 class CentroCustosDAO
 {

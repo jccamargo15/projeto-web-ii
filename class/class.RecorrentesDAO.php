@@ -6,7 +6,7 @@
 
 require_once '../inc/class.DbAdmin.php';
 require_once 'class.Recorrentes.php';
-require_once '../inc/config.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/projeto-web2/inc/config.php';;
 
 
 

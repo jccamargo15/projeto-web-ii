@@ -1,24 +1,24 @@
-<!-- criado por Jocemar Flores em 14/10/18
-	 atualizado por Jocemar Flores em 21/10/18
- -->
- 
-<?php 
-
-include_once($_SERVER['DOCUMENT_ROOT']."/projeto-web2/inc/class.DbAdmin.php");
-require_once 'class.Movimentacao.php';
+<?php
 
 /**
  * criado por José Carlos de camargo
  * em 04/10/2018
+ * atualizado por Jocemar Flores em 21/10/18
+ * atualizado por José Carlos 30/10/2018
  */
+
+include_once($_SERVER['DOCUMENT_ROOT']."/projeto-web2/inc/class.DbAdmin.php");
+require_once 'class.Movimentacao.php';
+require_once '../inc/config.php';
+
 class MovimentacaoDAO
 {
 	private $dba;
 
 	public function MovimentacaoDAO()
 	{
-		$dba = new DbAdmin('mysql');
-		$dba->connect('localhost', 'root', '', 'contas');
+		$dba = new DbAdmin(DB_TYPE);
+		$dba->connect(DB_SERVER,DB_USER,DB_PASSWD,DB_NAME);
 		//disponibiliza o objeto criado 
 		$this->dba = $dba;
 	}

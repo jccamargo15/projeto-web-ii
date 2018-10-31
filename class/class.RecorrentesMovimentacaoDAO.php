@@ -1,20 +1,24 @@
 <?php 
 
-require_once 'class.DbAdmin.php';
-require_once 'class.RecorrentesMovimentacao.php';
-
 /**
  * criado por José Carlos de camargo
  * em 04/10/2018
+ * alterado por José Carlos
+ * em 30/10/2018
  */
+
+require_once 'class.DbAdmin.php';
+require_once 'class.RecorrentesMovimentacao.php';
+require_once '../inc/config.php';
+
 class RecorrentesMovimentacaoDAO
 {
 	private $dba;
 
 	public function RecorrentesMovimentacaoDAO()
 	{
-		$dba = new DbAdmin('mysql');
-		$dba->connect('localhost', 'root', '', 'contas');
+		$dba = new DbAdmin(DB_TYPE);
+		$dba->connect(DB_SERVER,DB_USER,DB_PASSWD,DB_NAME);
 		//disponibiliza o objeto criado 
 		$this->dba = $dba;
 	}

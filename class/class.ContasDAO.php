@@ -1,24 +1,29 @@
-<?php 
-
-include_once($_SERVER['DOCUMENT_ROOT']."/projeto-web2/inc/class.DbAdmin.php");
-//require_once '../inc/class.DbAdmin.php';
-//include($_SERVER['DOCUMENT_ROOT']."/projeto-web2/class/class.Contas.php");
-require_once 'class.Contas.php';
+<?php
 
 /**
  * criado por José Carlos de camargo
  * em 04/10/2018
  * alterado por Jocemar Flores
  * em 14/10/2018
+ * alterado por José Carlos
+ * em 30/10/2018
  */
+
+include_once($_SERVER['DOCUMENT_ROOT']."/projeto-web2/inc/class.DbAdmin.php");
+//require_once '../inc/class.DbAdmin.php';
+//include($_SERVER['DOCUMENT_ROOT']."/projeto-web2/class/class.Contas.php");
+require_once 'class.Contas.php';
+require_once '../inc/config.php';
+
+
 class ContasDAO
 {
 	private $dba;
 
 	public function ContasDAO()
 	{
-		$dba = new DbAdmin('mysql');
-		$dba->connect('localhost', 'root', '', 'contas');
+		$dba = new DbAdmin(DB_TYPE);
+		$dba->connect(DB_SERVER,DB_USER,DB_PASSWD,DB_NAME);
 		//disponibiliza o objeto criado 
 		$this->dba = $dba;
 	}

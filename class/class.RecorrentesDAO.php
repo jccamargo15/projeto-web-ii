@@ -1,127 +1,130 @@
 <?php
-	/*
-	* Classe criada por Jocemar Flores em 04/10/2018
-	*/
+/**
+ * Classe criada por Jocemar Flores em 04/10/2018
+ * atualizado por José Carlos em 30/10/2018
+ */
 
-	require_once('../inc/class.DbAdmin.php');
-	require_once('class.Recorrentes.php');
+require_once '../inc/class.DbAdmin.php';
+require_once 'class.Recorrentes.php';
+require_once '../inc/config.php';
 
 
-	class RecorrentesDAO{
 
-		private $dba;
+class RecorrentesDAO{
 
-		public function RecorrentesDAO(){
+    private $dba;
 
-			$dba = new DbAdmin('mysql');
-			$dba->connect('localhost','root','','contas');
+    public function RecorrentesDAO(){
 
-			$this->dba = $dba;
-		}
+        $dba = new DbAdmin(DB_TYPE);
+        $dba->connect(DB_SERVER,DB_USER,DB_PASSWD,DB_NAME);
 
-		//método para inserir no banco
-		public function cadastra($recorrentes){
+        $this->dba = $dba;
+    }
 
-			//atribui o atributo de classe para a variavel
-			$dba = $this->dba;
+    //método para inserir no banco
+    public function cadastra($recorrentes){
 
-			//retira os dados de dentro do obj
-			$id_centro_custos = $recorrentes->getIdCentroCustos();
-			$id_conta = $recorrentes->getIdConta();
-			$tipo_mov = $recorrentes->getTipoMov();
-			$dia = $recorrentes->getDia();
-			$descricao = $recorrentes->getDescricao();
-			$valor = $recorrentes->getValor();
-						
-			//cria comando sql
-			$query = 'INSERT INTO recorrentes (id_centro_custos, id_conta, tipo_mov, dia, descricao, valor)
-						VALUES("'.$id_centro_custos.'","'.$id_conta.'","'.$tipo_mov.'","'.$dia.'","'.$descricao.'","'.$valor.'")';
+        //atribui o atributo de classe para a variavel
+        $dba = $this->dba;
 
-			//executar comando sql
-			$dba->query($query);
-		}
+        //retira os dados de dentro do obj
+        $id_centro_custos = $recorrentes->getIdCentroCustos();
+        $id_conta = $recorrentes->getIdConta();
+        $tipo_mov = $recorrentes->getTipoMov();
+        $dia = $recorrentes->getDia();
+        $descricao = $recorrentes->getDescricao();
+        $valor = $recorrentes->getValor();
 
-		public function excluir($recorrentes){
+        //cria comando sql
+        $query = 'INSERT INTO recorrentes (id_centro_custos, id_conta, tipo_mov, dia, descricao, valor)
+                    VALUES("'.$id_centro_custos.'","'.$id_conta.'","'.$tipo_mov.'","'.$dia.'","'.$descricao.'","'.$valor.'")';
 
-			//atribui o atributo de classe para a variavel
-			$dba = $this->dba;
+        //executar comando sql
+        $dba->query($query);
+    }
 
-			//retira os dados de dentro do obj
-			$id= $recorrentes->getId();
+    public function excluir($recorrentes){
 
-			//cria comando sql
-			$query = 'DELETE FROM recorrentes 
-						WHERE id = "'.$id.'"';
+        //atribui o atributo de classe para a variavel
+        $dba = $this->dba;
 
-			//executar comando sql
-			$dba->query($query);
-		}
+        //retira os dados de dentro do obj
+        $id= $recorrentes->getId();
 
-		public function atualiza($recorrentes){
+        //cria comando sql
+        $query = 'DELETE FROM recorrentes 
+                    WHERE id = "'.$id.'"';
 
-			//atribui o atributo de classe para a variavel
-			$dba = $this->dba;
+        //executar comando sql
+        $dba->query($query);
+    }
 
-			//retira os dados de dentro do obj
-			$id = $recorrentes->getId();
-			$id_centro_custos = $recorrentes->getIdCentroCustos();
-			$id_conta = $recorrentes->getIdConta();
-			$tipo_mov = $recorrentes->getTipoMov();
-			$dia = $recorrentes->getDia();
-			$descricao = $recorrentes->getDescricao();
-			$valor = $recorrentes->getValor();
-						
-			//cria comando sql
-			$query = 'UPDATE FROM recorrentes 
-						SET  id_centro_custos = "'.$id_centro_custos.'",
-							 id_conta = "'.$id_conta.'",
-							 tipo_mov = "'.$tipo_mov.'",
-							 dia = "'.$dia.'",
-							 descricao = "'.$descricao.'",
-							 valor = "'.$valor.'",
-					WHERE id = "'.$id.'"';
+    public function atualiza($recorrentes){
 
-			//executar comando sql
-			$dba->query($query);
-		}
+        //atribui o atributo de classe para a variavel
+        $dba = $this->dba;
 
-		public function lista(){
+        //retira os dados de dentro do obj
+        $id = $recorrentes->getId();
+        $id_centro_custos = $recorrentes->getIdCentroCustos();
+        $id_conta = $recorrentes->getIdConta();
+        $tipo_mov = $recorrentes->getTipoMov();
+        $dia = $recorrentes->getDia();
+        $descricao = $recorrentes->getDescricao();
+        $valor = $recorrentes->getValor();
 
-			$dba = $this->dba;
+        //cria comando sql
+        $query = 'UPDATE FROM recorrentes 
+                    SET  id_centro_custos = "'.$id_centro_custos.'",
+                         id_conta = "'.$id_conta.'",
+                         tipo_mov = "'.$tipo_mov.'",
+                         dia = "'.$dia.'",
+                         descricao = "'.$descricao.'",
+                         valor = "'.$valor.'",
+                WHERE id = "'.$id.'"';
 
-			$query = 'SELECT * FROM recorrentes';
+        //executar comando sql
+        $dba->query($query);
+    }
 
-			$res = $dba->query($query);
+    public function lista(){
 
-			$num = $dba->rows($res);
+        $dba = $this->dba;
 
-			for($i=0; $i<$num; $i++){
+        $query = 'SELECT * FROM recorrentes';
 
-				$id = $dba->result($res,$i,'id');
-				$id_centro_custos = $dba->result($res,$i,'id_centro_custos');
-				$id_conta = $dba->result($res,$i,'id_conta');
-				$tipo_mov = $dba->result($res,$i,'tipo_mov');
-				$dia = $dba->result($res,$i,'dia');
-				$descricao = $dba->result($res,$i,'descricao');
-				$valor = $dba->result($res,$i,'valor');
-								
-				$recorrentes = new Recorrentes;
+        $res = $dba->query($query);
 
-				$recorrentes->setId($id);
-				$recorrentes->setIdCentroCustos($id_centro_custos);
-				$recorrentes->setIdConta($id_conta);
-				$recorrentes->setTipoMov($tipo_mov);
-				$recorrentes->setDia($dia);
-				$recorrentes->setDescricao($descricao);
-				$recorrentes->setValor($valor);
-								
-				$vet[] = $recorrentes;
+        $num = $dba->rows($res);
 
-			}
+        for($i=0; $i<$num; $i++){
 
-			return $vet;
+            $id = $dba->result($res,$i,'id');
+            $id_centro_custos = $dba->result($res,$i,'id_centro_custos');
+            $id_conta = $dba->result($res,$i,'id_conta');
+            $tipo_mov = $dba->result($res,$i,'tipo_mov');
+            $dia = $dba->result($res,$i,'dia');
+            $descricao = $dba->result($res,$i,'descricao');
+            $valor = $dba->result($res,$i,'valor');
 
-		}
+            $recorrentes = new Recorrentes;
+
+            $recorrentes->setId($id);
+            $recorrentes->setIdCentroCustos($id_centro_custos);
+            $recorrentes->setIdConta($id_conta);
+            $recorrentes->setTipoMov($tipo_mov);
+            $recorrentes->setDia($dia);
+            $recorrentes->setDescricao($descricao);
+            $recorrentes->setValor($valor);
+
+            $vet[] = $recorrentes;
+
+        }
+
+        return $vet;
+
+    }
 
 }
 

@@ -51,7 +51,7 @@ class MovimentacaoDAO
 
 		//$query = 'SELECT * FROM movimentacao';
 		$query = 'SELECT movimentacao.id, movimentacao.tipo_mov, movimentacao.data, movimentacao.descricao, 
-						movimentacao.valor, contas.nome, centro_custos.nome, DATE_FORMAT(data,"%d/%m/%Y") as data_formatada
+						movimentacao.valor, contas.nome, centro_custos.nome, DATE_FORMAT(data,"%d/%m/%Y") as data_formatada, FORMAT(valor, 2, "de_DE") as valor_formatado
 				  FROM movimentacao, contas, centro_custos
 				  WHERE movimentacao.id_conta = contas.id 
 				        AND movimentacao.id_centro_custos = centro_custos.id 
@@ -68,7 +68,7 @@ class MovimentacaoDAO
 			$tipo_mov 			= $dba->result($res, $i, 'tipo_mov');
 			$data 				= $dba->result($res, $i, 'data_formatada');
 			$descricao 			= $dba->result($res, $i, 'descricao');
-			$valor 				= $dba->result($res, $i, 'valor');
+			$valor 				= $dba->result($res, $i, 'valor_formatado');
 
 			$mov = new Movimentacao();
 			$mov->setId($id);

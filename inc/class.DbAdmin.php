@@ -23,9 +23,8 @@
 
                 case 'mysqli':
                     //conexão ativa, guardada em "tipo"
-                    $this->conn = mysqli_connect($host, $user, $pass, $base) or die(mysqli_error());
-                    mysqli_select_db($base, $this->conn) or die(mysqli_error());
-
+                    $this->conn = mysqli_connect($host, $user, $pass, $base) or die();
+//                    mysqli_select_db($base, $this->conn) or die(mysqli_error());
                     break;
 			}
 		}
@@ -89,7 +88,9 @@
 					break;
 
                 case 'mysqli':
-                    $val = mysqli_data_seek($res, $lin);
+                    $result = mysqli_data_seek($res, $lin);
+                    $row = mysqli_fetch_assoc($result);
+                    $val = $row[$col];
                     break;
 				
 				case 'pgsql':

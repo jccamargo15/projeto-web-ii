@@ -1,6 +1,11 @@
 <!-- criado por Jose Camargo em 04/10/18
      atualizado por Jocemar Flores em 21/10/18
 -->
+<?php 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+?>
 
 <!doctype html>
 <html lang="en">

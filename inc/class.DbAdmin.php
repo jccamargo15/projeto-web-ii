@@ -12,12 +12,17 @@
 		}
 
 		public function connect($host, $user, $pass, $base){
+			$tipo = $this->tipo;
+				//echo $tipo;
 
-			switch ($this->tipo) {
+			switch ($tipo) {
 				case 'mysql':
+				echo $tipo;
+
 					//conexão ativa, guardada em "tipo"
 					$this->conn = mysql_connect($host, $user, $pass) or die(mysql_error());
 					mysql_select_db($base, $this->conn) or die(mysql_error());
+					//die('BRESSAN PEREBA234');
 
 					break;
 
@@ -25,11 +30,13 @@
                     //conexão ativa, guardada em "tipo"
                     $this->conn = mysqli_connect($host, $user, $pass, $base) or die();
 //                    mysqli_select_db($base, $this->conn) or die(mysqli_error());
+                    //die('BRESSAN 222');
                     break;
 			}
 		}
 
 		public function query($sql){
+			//$conn = $this->conn;
 
 			switch ($this->tipo) {
 				case 'mysql':
@@ -37,9 +44,11 @@
 					break;
 
                 case 'mysqli':
-                    $res = mysqli_query($sql, $this->conn) or die();
+                    $res = mysqli_query($conn, $sql) or die();
+                    echo "CONSULTOU";
                     break;
 			}
+			die('TESTE');
 
 			return $res;
 		}
@@ -88,10 +97,15 @@
 					break;
 
                 case 'mysqli':
-                    $result = mysqli_data_seek($res, $lin);
-                    $row = mysqli_fetch_assoc($result);
-                    $val = $row[$col];
-                    break;
+        //         	$res->data_seek($lin); 
+        //         	$valor = $res->fetch_array();
+    				// $val = $valor[$col]; 
+                echo "AQUI";	
+
+                	// $val = mysqli_result($res, $lin, $col);
+                	// die('TESTE');
+                	// echo $val;
+                 //    break;
 				
 				case 'pgsql':
 					$val = pg_fetch_result($res, $lin, $col);

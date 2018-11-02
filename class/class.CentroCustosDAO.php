@@ -14,7 +14,7 @@
  * alterado por José Carlos
  * em 30/10/2018
  */
-include_once($_SERVER['DOCUMENT_ROOT']."/projeto-web2/inc/class.DbAdmin.php");
+// include_once($_SERVER['DOCUMENT_ROOT']."/projeto-web2/inc/class.DbAdmin.php");
 //require_once '../class/class.DbAdmin.php';
 require_once 'class.CentroCustos.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/projeto-web2/inc/config.php';

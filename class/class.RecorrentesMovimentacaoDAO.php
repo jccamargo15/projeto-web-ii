@@ -7,7 +7,7 @@
  * em 30/10/2018
  */
 
-require_once 'class.DbAdmin.php';
+// require_once 'class.DbAdmin.php';
 require_once 'class.RecorrentesMovimentacao.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/projeto-web2/inc/config.php';
 

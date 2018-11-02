@@ -7,8 +7,8 @@
  * atualizado por José Carlos 30/10/2018
  */
 
-include_once($_SERVER['DOCUMENT_ROOT']."/projeto-web2/inc/class.DbAdmin.php");
-require_once 'class.Movimentacao.php';
+//include_once($_SERVER['DOCUMENT_ROOT']."/projeto-web2/inc/class.DbAdmin.php");
+require_once $_SERVER['DOCUMENT_ROOT'].'/projeto-web2/class/class.Movimentacao.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/projeto-web2/inc/config.php';
 
 class MovimentacaoDAO
@@ -18,7 +18,7 @@ class MovimentacaoDAO
 	public function MovimentacaoDAO()
 	{
 		$dba = new DbAdmin(DB_TYPE);
-		$dba->connect(DB_SERVER,DB_USER,DB_PASSWD,DB_NAME);
+		$dba->connect('localhost','root','','contas');
 		//disponibiliza o objeto criado 
 		$this->dba = $dba;
 	}

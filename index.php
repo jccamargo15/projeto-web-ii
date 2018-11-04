@@ -2,6 +2,7 @@
      atualizado por Jocemar Flores em 21/10/18
 -->
 <?php 
+// liga e desliga exibição dos erros e warnings
 $show_errors_and_warnings = 0;
 
 if ($show_errors_and_warnings) {
@@ -9,8 +10,15 @@ if ($show_errors_and_warnings) {
   ini_set('display_startup_errors', 1);
   error_reporting(E_ALL);
 }
-?>
 
+// preenche variável de página com link visitado ou preenche com "home"
+if (isset($_GET['page']) && !empty($_GET['page'])) {
+  $page = $_GET['page'];
+} else {
+  $page = 'home';
+}
+
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -62,15 +70,9 @@ if ($show_errors_and_warnings) {
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
-          <?php 
-            if (isset($_GET['page']) && !empty($_GET['page'])) {
-              include_once 'src/tpl.'.$_GET['page'].'.php';
-            } else {
-              include 'src/tpl.home.php';
-            }
-          ?>
+        <?php include 'src/tpl.'.$page.'.php'; ?>
+        
         </main>
-
       </div>
     </div>
 

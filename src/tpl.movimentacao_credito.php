@@ -190,10 +190,10 @@
             echo '<td>'. $lista[$i]->getDescricao() .'</td>';
             echo '<td>'. $lista[$i]->getIdConta() .'</td>';
             echo '<td>'. $lista[$i]->getIdCentroCustos() .'</td>';
-            echo '<td>'. $lista[$i]->getValor() .'</td>';
+            echo '<td> R$ '. $lista[$i]->getValor() .'</td>';
             echo '<td> 
               <a href= "index.php?page=movimentacao_credito&editar=1&id='. $lista[$i]->getId() .'&acao=editar"><img width="24px" heigth="24px" src="img/edit.png"></a>
-              <a href= "src/acao_movimentacao.php?id='. $lista[$i]->getId() .'&acao=excluir"><img width="24px" heigth="244px" src="img/delete.png"></a>
+              <a href= "src/acao_movimentacao.php?id='. $lista[$i]->getId() .'&acao=excluir&tipo=credito"><img width="24px" heigth="244px" src="img/delete.png"></a>
             </td>';
 
           echo '</tr>';

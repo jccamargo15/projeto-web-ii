@@ -1,132 +1,129 @@
 <?php
-/**
- * Classe criada por José Camargo em 04/10/2018
- * Classe atualizada por Jocemar Flores em 21/10/2018
- * atualizado por José Carlos em 30/10/2018
- */
-
-// include_once($_SERVER['DOCUMENT_ROOT']."/projeto-web2/inc/class.DbAdmin.php");
-require_once('class.Item.php');
-require_once $_SERVER['DOCUMENT_ROOT'].'/projeto-web2/inc/config.php';
+	/*
+	* Classe criada por José Camargo em 04/10/2018
+	* Classe atualizada por Jocemar Flores em 21/10/2018
+	*/
+	include_once($_SERVER['DOCUMENT_ROOT']."/projeto-web2/inc/class.DbAdmin.php");
+	require_once('class.Item.php');
 
 
-class ItemDAO{
+	class ItemDAO{
 
-    private $dba;
+		private $dba;
 
-    public function ItemDAO(){
+		public function ItemDAO(){
 
-        $dba = new DbAdmin(DB_TYPE);
-        $dba->connect(DB_SERVER,DB_USER,DB_PASSWD,DB_NAME);
+			$dba = new DbAdmin('mysql');
+			$dba->connect('localhost','root','','contas');
 
-        $this->dba = $dba;
-    }
+			$this->dba = $dba;
+		}
 
-    //método para inserir no banco
-    public function cadastra($item){
+		//método para inserir no banco
+		public function cadastra($item){
 
-        //atribui o atributo de classe para a variavel
-        $dba = $this->dba;
+			//atribui o atributo de classe para a variavel
+			$dba = $this->dba;
 
-        //retira os dados de dentro do obj
-        $descricao = $item->getDescricao();
+			//retira os dados de dentro do obj
+			$descricao = $item->getDescricao();
+			
+			//cria comando sql
+			$query = 'INSERT INTO item (descricao)
+						VALUES("'.$descricao.'")';
 
-        //cria comando sql
-        $query = 'INSERT INTO item (descricao)
-                    VALUES("'.$descricao.'")';
+			//executar comando sql
+			$dba->query($query);
+		}
 
-        //executar comando sql
-        $dba->query($query);
-    }
+		public function excluir($item){
 
-    public function excluir($item){
+			//atribui o atributo de classe para a variavel
+			$dba = $this->dba;
 
-        //atribui o atributo de classe para a variavel
-        $dba = $this->dba;
+			//retira os dados de dentro do obj
+			$id= $item->getId();
 
-        //retira os dados de dentro do obj
-        $id= $item->getId();
+			//cria comando sql
+			$query = 'DELETE FROM item 
+						WHERE id = "'.$id.'"';
 
-        //cria comando sql
-        $query = 'DELETE FROM item 
-                    WHERE id = "'.$id.'"';
+			//executar comando sql
+			$dba->query($query);
+		}
 
-        //executar comando sql
-        $dba->query($query);
-    }
+		public function atualiza($item){
 
-    public function atualiza($item){
+			//atribui o atributo de classe para a variavel
+			$dba = $this->dba;
 
-        //atribui o atributo de classe para a variavel
-        $dba = $this->dba;
+			//retira os dados de dentro do obj
+			$id = $item->getId();
+			$descricao = $item->getDescricao();
+			
+			//cria comando sql
+			$query = 'UPDATE item 
+						SET  descricao = "'.$descricao.'"
+						WHERE id = "'.$id.'"';
 
-        //retira os dados de dentro do obj
-        $id = $item->getId();
-        $descricao = $item->getDescricao();
+			//executar comando sql
+			$dba->query($query);
+		}
 
-        //cria comando sql
-        $query = 'UPDATE item 
-                    SET  descricao = "'.$descricao.'"
-                    WHERE id = "'.$id.'"';
+		public function lista(){
 
-        //executar comando sql
-        $dba->query($query);
-    }
+			$dba = $this->dba;
 
-    public function lista(){
+			$query = 'SELECT * FROM item';
 
-        $dba = $this->dba;
+			$res = $dba->query($query);
 
-        $query = 'SELECT * FROM item';
+			$num = $dba->linhas_consulta($res);
 
-        $res = $dba->query($query);
+			for($i=0; $i<$num; $i++){
 
-        $num = $dba->linhas_consulta($res);
+				$id = $dba->result($res,$i,'id');
+				$descricao = $dba->result($res,$i,'descricao');
+				
+				$item = new Item;
 
-        for($i=0; $i<$num; $i++){
+				$item->setId($id);
+				$item->setDescricao($descricao);
+				
+				$vet[] = $item;
 
-            $id = $dba->result($res,$i,'id');
-            $descricao = $dba->result($res,$i,'descricao');
+			}
 
-            $item = new Item;
+			return $vet;
 
-            $item->setId($id);
-            $item->setDescricao($descricao);
+		}
 
-            $vet[] = $item;
+		public function listaUm($idc){
+				$dba = $this->dba;
 
-        }
+				//$idc = $con->getId();
 
-        return $vet;
+				$query = 'SELECT * FROM item WHERE id = '.$idc;
 
-    }
+				$res = $dba->query($query);
 
-    public function listaUm($idc){
-            $dba = $this->dba;
-
-            //$idc = $con->getId();
-
-            $query = 'SELECT * FROM item WHERE id = '.$idc;
-
-            $res = $dba->query($query);
-
-            $num = $dba->linhas_consulta($res);
+				$num = $dba->linhas_consulta($res);
 
 
 
-            //for ($i=0; $i<=$num; $i++) {
-                $idc = $dba->result($res, 0, 'id');
-                $nom = $dba->result($res, 0, 'descricao');
+				//for ($i=0; $i<=$num; $i++) { 
+					$idc = $dba->result($res, 0, 'id');
+					$nom = $dba->result($res, 0, 'descricao');
 
-                $con = new Item();
-                $con->setId($idc);
-                $con->setDescricao($nom);
+					$con = new Item();
+					$con->setId($idc);
+					$con->setDescricao($nom);
 
-                $ver[] = $con;
-            //}
+					$ver[] = $con;
+				//}
 
-            return $ver;
-        }
+				return $ver;
+			}
 
 }
 

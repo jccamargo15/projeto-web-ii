@@ -5,19 +5,10 @@
  * em 14/10/2018
  -->
 
-<?php
-/**
- * criado por José Carlos de camargo
- * em 04/10/2018
- * alterado por Jocemar Flores
- * em 14/10/2018
- * alterado por José Carlos
- * em 30/10/2018
- */
-// include_once($_SERVER['DOCUMENT_ROOT']."/projeto-web2/inc/class.DbAdmin.php");
+<?php 
+include_once($_SERVER['DOCUMENT_ROOT']."/projeto-web2/inc/class.DbAdmin.php");
 //require_once '../class/class.DbAdmin.php';
 require_once 'class.CentroCustos.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/projeto-web2/inc/config.php';
 
 class CentroCustosDAO
 {
@@ -25,8 +16,8 @@ class CentroCustosDAO
 
 	public function CentroCustosDAO()
 	{
-		$dba = new DbAdmin(DB_TYPE);
-		$dba->connect(DB_SERVER,DB_USER,DB_PASSWD,DB_NAME);
+		$dba = new DbAdmin('mysql');
+		$dba->connect('localhost', 'root', '', 'contas');
 		//disponibiliza o objeto criado 
 		$this->dba = $dba;
 	}

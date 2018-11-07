@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 14-Out-2018 às 22:33
+-- Generation Time: 02-Nov-2018 às 00:26
 -- Versão do servidor: 10.1.30-MariaDB
 -- PHP Version: 5.6.33
 
@@ -39,7 +39,9 @@ CREATE TABLE `centro_custos` (
 
 INSERT INTO `centro_custos` (`id`, `nome`) VALUES
 (2, 'Moradia'),
-(3, 'CombustÃ­vel');
+(3, 'CombustÃ­vel'),
+(4, 'SalÃ¡rio'),
+(6, 'AuxÃ­lio Transporte');
 
 -- --------------------------------------------------------
 
@@ -71,6 +73,13 @@ CREATE TABLE `item` (
   `descricao` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Extraindo dados da tabela `item`
+--
+
+INSERT INTO `item` (`id`, `descricao`) VALUES
+(1, 'Carro');
+
 -- --------------------------------------------------------
 
 --
@@ -86,6 +95,16 @@ CREATE TABLE `movimentacao` (
   `descricao` varchar(100) NOT NULL,
   `valor` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `movimentacao`
+--
+
+INSERT INTO `movimentacao` (`id`, `id_centro_custos`, `id_conta`, `tipo_mov`, `data`, `descricao`, `valor`) VALUES
+(2, 6, 2, 'credito', '2018-10-22', 'Passagem Setembro', '200.00'),
+(4, 3, 1, 'debito', '2018-10-15', 'Gasolina', '90.00'),
+(7, 4, 1, 'credito', '2018-11-01', 'SalÃ¡rio setembro', '3000.00'),
+(8, 6, 2, 'debito', '2018-11-01', 'Carro', '50.00');
 
 -- --------------------------------------------------------
 
@@ -180,25 +199,25 @@ ALTER TABLE `recorrentes`
 -- AUTO_INCREMENT for table `centro_custos`
 --
 ALTER TABLE `centro_custos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `contas`
 --
 ALTER TABLE `contas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `movimentacao`
 --
 ALTER TABLE `movimentacao`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `parcelas`

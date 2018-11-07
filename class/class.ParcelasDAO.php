@@ -1,139 +1,137 @@
 <?php
-/**
- * Classe criada por José Camargo em 04/10/2018
- * atualizado por José Carlos em 30/10/2018
- */
+	/*
+	* Classe criada por José Camargo em 04/10/2018
+	*/
 
-require_once '../inc/class.DbAdmin.php';
-require_once 'class.Parcelas.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/projeto-web2/inc/config.php';
+	require_once('../inc/class.DbAdmin.php');
+	require_once('class.Parcelas.php');
 
 
-class ParcelasDAO{
+	class ParcelasDAO{
 
-    private $dba;
+		private $dba;
 
-    public function ParcelasDAO(){
+		public function ParcelasDAO(){
 
-        $dba = new DbAdmin(DB_TYPE);
-        $dba->connect(DB_SERVER,DB_USER,DB_PASSWD,DB_NAME);
+			$dba = new DbAdmin('mysql');
+			$dba->connect('localhost','root','','contas');
 
-        $this->dba = $dba;
-    }
+			$this->dba = $dba;
+		}
 
-    //método para inserir no banco
-    public function cadastra($parcelas){
+		//método para inserir no banco
+		public function cadastra($parcelas){
 
-        //atribui o atributo de classe para a variavel
-        $dba = $this->dba;
+			//atribui o atributo de classe para a variavel
+			$dba = $this->dba;
 
-        //retira os dados de dentro do obj
-        $id_centro_custos = $parcelas->getIdCentroCustos();
-        $id_conta = $parcelas->getIdConta();
-        $id_item = $parcelas->getIdItem();
-        $tipo_mov = $parcelas->getTipoMov();
-        $parcela = $parcelas->getParcela();
-        $vencimento = $parcelas->getVencimento();
-        $valor = $parcelas->getValor();
-        $status_pagamento = $parcelas->getStatusPagamento();
+			//retira os dados de dentro do obj
+			$id_centro_custos = $parcelas->getIdCentroCustos();
+			$id_conta = $parcelas->getIdConta();
+			$id_item = $parcelas->getIdItem();
+			$tipo_mov = $parcelas->getTipoMov();
+			$parcela = $parcelas->getParcela();
+			$vencimento = $parcelas->getVencimento();
+			$valor = $parcelas->getValor();
+			$status_pagamento = $parcelas->getStatusPagamento();
+			
+			//cria comando sql
+			$query = 'INSERT INTO parcelas (id_centro_custos, id_conta, id_item, tipo_mov, parcela, vencimento, valor, status_pagamento)
+						VALUES("'.$id_centro_custos.'","'.$id_conta.'","'.$id_item.'","'.$tipo_mov.'","'.$parcela.'","'.$vencimento.'","'.$valor.'","'.$status_pagamento.'",)';
 
-        //cria comando sql
-        $query = 'INSERT INTO parcelas (id_centro_custos, id_conta, id_item, tipo_mov, parcela, vencimento, valor, status_pagamento)
-                    VALUES("'.$id_centro_custos.'","'.$id_conta.'","'.$id_item.'","'.$tipo_mov.'","'.$parcela.'","'.$vencimento.'","'.$valor.'","'.$status_pagamento.'",)';
+			//executar comando sql
+			$dba->query($query);
+		}
 
-        //executar comando sql
-        $dba->query($query);
-    }
+		public function excluir($parcelas){
 
-    public function excluir($parcelas){
+			//atribui o atributo de classe para a variavel
+			$dba = $this->dba;
 
-        //atribui o atributo de classe para a variavel
-        $dba = $this->dba;
+			//retira os dados de dentro do obj
+			$id= $parcelas->getId();
 
-        //retira os dados de dentro do obj
-        $id= $parcelas->getId();
+			//cria comando sql
+			$query = 'DELETE FROM parcelas 
+						WHERE id = "'.$id.'"';
 
-        //cria comando sql
-        $query = 'DELETE FROM parcelas 
-                    WHERE id = "'.$id.'"';
+			//executar comando sql
+			$dba->query($query);
+		}
 
-        //executar comando sql
-        $dba->query($query);
-    }
+		public function atualiza($parcelas){
 
-    public function atualiza($parcelas){
+			//atribui o atributo de classe para a variavel
+			$dba = $this->dba;
 
-        //atribui o atributo de classe para a variavel
-        $dba = $this->dba;
+			//retira os dados de dentro do obj
+			$id = $parcelas->getId();
+			$id_centro_custos = $parcelas->getIdCentroCustos();
+			$id_conta = $parcelas->getIdConta();
+			$id_item = $parcelas->getIdItem();
+			$tipo_mov = $parcelas->getTipoMov();
+			$parcela = $parcelas->getParcela();
+			$vencimento = $parcelas->getVencimento();
+			$valor = $parcelas->getValor();
+			$status_pagamento = $parcelas->getStatusPagamento();
+			
+			//cria comando sql
+			$query = 'UPDATE FROM parcelas 
+						SET  id_centro_custos = "'.$id_centro_custos.'",
+							 id_conta = "'.$id_conta.'",
+							 id_item = "'.$id_item.'",
+							 tipo_mov = "'.$tipo_mov.'",
+							 parcela = "'.$parcela.'",
+							 vencimento = "'.$vencimento.'",
+							 valor = "'.$valor.'",
+							 status_pagamento = "'.$status_pagamento.'",
+						WHERE id = "'.$id.'"';
 
-        //retira os dados de dentro do obj
-        $id = $parcelas->getId();
-        $id_centro_custos = $parcelas->getIdCentroCustos();
-        $id_conta = $parcelas->getIdConta();
-        $id_item = $parcelas->getIdItem();
-        $tipo_mov = $parcelas->getTipoMov();
-        $parcela = $parcelas->getParcela();
-        $vencimento = $parcelas->getVencimento();
-        $valor = $parcelas->getValor();
-        $status_pagamento = $parcelas->getStatusPagamento();
+			//executar comando sql
+			$dba->query($query);
+		}
 
-        //cria comando sql
-        $query = 'UPDATE FROM parcelas 
-                    SET  id_centro_custos = "'.$id_centro_custos.'",
-                         id_conta = "'.$id_conta.'",
-                         id_item = "'.$id_item.'",
-                         tipo_mov = "'.$tipo_mov.'",
-                         parcela = "'.$parcela.'",
-                         vencimento = "'.$vencimento.'",
-                         valor = "'.$valor.'",
-                         status_pagamento = "'.$status_pagamento.'",
-                    WHERE id = "'.$id.'"';
+		public function lista(){
 
-        //executar comando sql
-        $dba->query($query);
-    }
+			$dba = $this->dba;
 
-    public function lista(){
+			$query = 'SELECT * FROM parcelas';
 
-        $dba = $this->dba;
+			$res = $dba->query($query);
 
-        $query = 'SELECT * FROM parcelas';
+			$num = $dba->rows($res);
 
-        $res = $dba->query($query);
+			for($i=0; $i<$num; $i++){
 
-        $num = $dba->rows($res);
+				$id = $dba->result($res,$i,'id');
+				$id_centro_custos = $dba->result($res,$i,'id_centro_custos');
+				$id_conta = $dba->result($res,$i,'id_conta');
+				$id_item = $dba->result($res,$i,'id_item');
+				$tipo_mov = $dba->result($res,$i,'tipo_mov');
+				$parcela = $dba->result($res,$i,'parcela');
+				$vencimento = $dba->result($res,$i,'vencimento');
+				$valor = $dba->result($res,$i,'valor');
+				$status_pagamento = $dba->result($res,$i,'status_pagamento');
+				
+				$parcelas = new Parcelas;
 
-        for($i=0; $i<$num; $i++){
+				$parcelas->setId($id);
+				$parcelas->setIdCentroCustos($id_centro_custos);
+				$parcelas->setIdConta($id_conta);
+				$parcelas->setIdItem($id_item);
+				$parcelas->setTipoMov($tipo_mov);
+				$parcelas->setParcela($parcela);
+				$parcelas->setVencimento($vencimento);
+				$parcelas->setValor($valor);
+				$parcelas->setStatusPagamento($status_pagamento);
+				
+				$vet[] = $parcelas;
 
-            $id = $dba->result($res,$i,'id');
-            $id_centro_custos = $dba->result($res,$i,'id_centro_custos');
-            $id_conta = $dba->result($res,$i,'id_conta');
-            $id_item = $dba->result($res,$i,'id_item');
-            $tipo_mov = $dba->result($res,$i,'tipo_mov');
-            $parcela = $dba->result($res,$i,'parcela');
-            $vencimento = $dba->result($res,$i,'vencimento');
-            $valor = $dba->result($res,$i,'valor');
-            $status_pagamento = $dba->result($res,$i,'status_pagamento');
+			}
 
-            $parcelas = new Parcelas;
+			return $vet;
 
-            $parcelas->setId($id);
-            $parcelas->setIdCentroCustos($id_centro_custos);
-            $parcelas->setIdConta($id_conta);
-            $parcelas->setIdItem($id_item);
-            $parcelas->setTipoMov($tipo_mov);
-            $parcelas->setParcela($parcela);
-            $parcelas->setVencimento($vencimento);
-            $parcelas->setValor($valor);
-            $parcelas->setStatusPagamento($status_pagamento);
-
-            $vet[] = $parcelas;
-
-        }
-
-        return $vet;
-
-    }
+		}
 
 }
 

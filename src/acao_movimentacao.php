@@ -16,6 +16,7 @@
 		$movimentacaoDAO = new MovimentacaoDAO();
 		$movimentacaoDAO->excluir($movimentacao);
 
+	
 		if($tipo == 'credito'){
 			header("Location: ../index.php?page=movimentacao_credito&confirm=3");
 			exit();
@@ -42,6 +43,15 @@
 			$movimentacaoDAO = new MovimentacaoDAO();
 			$movimentacaoDAO->cadastra($movimentacao);
 
+			$arq = '../log/log_movimentacao.txt';
+			$msg = '['. date("d/m/Y H:i:s").'] - ';
+			$msg .= $movimentacao->getTipoMov() .' - ';
+			$msg .= 'R$ '. $movimentacao->getValor();
+			$msg .= PHP_EOL;
+			$fo = fopen($arq, 'a'); 
+			fwrite($fo, $msg);
+			fclose($fo);
+
 			if($_POST['tipo_mov'] == 'credito'){
 				header("Location: ../index.php?page=movimentacao_credito&confirm=1");
 				exit();
@@ -67,6 +77,7 @@
 
 			$movimentacaoDAO = new MovimentacaoDAO();
 			$movimentacaoDAO->atualiza($movimentacao);
+
 
 			if($_POST['tipo_mov'] == 'credito'){
 				header("Location: ../index.php?page=movimentacao_credito&confirm=2");

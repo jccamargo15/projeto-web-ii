@@ -10,13 +10,16 @@
 
   if( isset($_GET['confirm']) and !empty($_GET['confirm']) ){
     if($_GET['confirm'] == 1){
-      echo "Débito cadastrado com sucesso!!";
+      // echo "Débito cadastrado com sucesso!!";
+      echo '<div class="alert alert-success" role="alert">Débito cadastrado com sucesso</div>';
     }
     if($_GET['confirm'] == 2){
-      echo "Débito atualizado com sucesso!!";
+      // echo "Débito atualizado com sucesso!!";
+      echo '<div class="alert alert-primary" role="alert">Débito atualizado com sucesso</div>';
     }
     if($_GET['confirm'] == 3){
-      echo "Débito excluído com sucesso!!";
+      // echo "Débito excluído com sucesso!!";
+      echo '<div class="alert alert-danger" role="alert">Débito excluído com sucesso</div>';
     }
   }
 

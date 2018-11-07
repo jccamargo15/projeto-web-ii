@@ -7,13 +7,16 @@
 
   if( isset($_GET['confirm']) and !empty($_GET['confirm']) ){
     if($_GET['confirm'] == 1){
-      echo "Conta cadastrada com sucesso!!";
+      // echo "Conta cadastrada com sucesso!!";
+      echo '<div class="alert alert-success" role="alert">Conta cadastrada com sucesso</div>';
     }
     if($_GET['confirm'] == 2){
-      echo "Conta atualizada com sucesso!!";
+      // echo "Conta atualizada com sucesso!!";
+      echo '<div class="alert alert-primary" role="alert">Conta atualizada com sucesso</div>';
     }
     if($_GET['confirm'] == 3){
-      echo "Conta excluída com sucesso!!";
+      // echo "Conta excluída com sucesso!!";
+      echo '<div class="alert alert-danger" role="alert">Conta excluída com sucesso</div>';
     }
   }
 

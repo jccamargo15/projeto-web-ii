@@ -9,13 +9,16 @@
 
   if( isset($_GET['confirm']) and !empty($_GET['confirm']) ){
     if($_GET['confirm'] == 1){
-      echo "Crédito cadastrada com sucesso!!";
+      // echo "Crédito cadastrada com sucesso!!";
+      echo '<div class="alert alert-success" role="alert">Crédito cadastrada com sucesso</div>';
     }
     if($_GET['confirm'] == 2){
-      echo "Crédito atualizada com sucesso!!";
+      // echo "Crédito atualizada com sucesso!!";
+      echo '<div class="alert alert-primary" role="alert">Crédito atualizada com sucesso</div>';
     }
     if($_GET['confirm'] == 3){
-      echo "Crédito excluída com sucesso!!";
+      // echo "Crédito excluída com sucesso!!";
+      echo '<div class="alert alert-danger" role="alert">Crédito excluída com sucesso</div>';
     }
   }
 

@@ -7,13 +7,16 @@
 
   if( isset($_GET['confirm']) and !empty($_GET['confirm']) ){
     if($_GET['confirm'] == 1){
-      echo "Categoria cadastrada com sucesso!!";
+      // echo "Categoria cadastrada com sucesso!!";
+      echo '<div class="alert alert-success" role="alert">Categoria cadastrada com sucesso</div>';
     }
     if($_GET['confirm'] == 2){
-      echo "Categoria atualizada com sucesso!!";
+      // echo "Categoria atualizada com sucesso!!";
+      echo '<div class="alert alert-primary" role="alert">Categoria atualizada com sucesso</div>';
     }
     if($_GET['confirm'] == 3){
-      echo "Categoria excluída com sucesso!!";
+      // echo "Categoria excluída com sucesso!!";
+      echo '<div class="alert alert-danger" role="alert">Categoria excluída com sucesso</div>';
     }
   }
 

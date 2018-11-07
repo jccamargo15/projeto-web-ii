@@ -1,5 +1,4 @@
-<!-- criado por Jocemar Filho
-    em 14/10/18 -->
+<!-- Projeto GitHub: https://github.com/jccamargo15/projeto-web2 -->
 <?php
   include_once('class/class.CentroCustos.php');
   include_once('class/class.CentroCustosDAO.php');

@@ -1,8 +1,5 @@
+<!-- Projeto GitHub: https://github.com/jccamargo15/projeto-web2 -->
 <?php
-	/*
-	* Classe criada por Jocemar Flores em 04/10/2018
-	*/
-
 	require_once('../inc/class.DbAdmin.php');
 	require_once('class.Recorrentes.php');
 

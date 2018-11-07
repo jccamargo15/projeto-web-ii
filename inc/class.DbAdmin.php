@@ -1,3 +1,4 @@
+<!-- Projeto GitHub: https://github.com/jccamargo15/projeto-web2 -->
 <?php
 
 	class DbAdmin{

@@ -1,12 +1,9 @@
+<!-- Projeto GitHub: https://github.com/jccamargo15/projeto-web2 -->
 <?php 
 
 require_once 'class.DbAdmin.php';
 require_once 'class.RecorrentesMovimentacao.php';
 
-/**
- * criado por José Carlos de camargo
- * em 04/10/2018
- */
 class RecorrentesMovimentacaoDAO
 {
 	private $dba;

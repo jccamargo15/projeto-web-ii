@@ -1,6 +1,4 @@
-<!-- criado por Jocemar Filho
-    em 14/10/18 -->
-
+<!-- Projeto GitHub: https://github.com/jccamargo15/projeto-web2 -->
 <?php
 	
 	require_once('../class/class.Contas.php');

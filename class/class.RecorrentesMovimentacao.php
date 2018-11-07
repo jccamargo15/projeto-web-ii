@@ -1,8 +1,5 @@
+<!-- Projeto GitHub: https://github.com/jccamargo15/projeto-web2 -->
 <?php
-	/*
-	* Classe criada por José Camargo em 04/10/2018
-	*/
-
 	class RecorrentesMovimentacao{
 
 		private $id_recorrentes;

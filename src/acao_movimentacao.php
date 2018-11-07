@@ -1,6 +1,4 @@
-<!-- criado por Jocemar Flores em 14/10/18
-	 atualizado por Jocemar Flores em 21/10/18
- -->
+<!-- Projeto GitHub: https://github.com/jccamargo15/projeto-web2 -->
 <?php
 	
 	require_once('../class/class.Movimentacao.php');

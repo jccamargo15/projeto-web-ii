@@ -1,6 +1,4 @@
-<!-- criado por Jose Camargo em 04/10/18
-     atualizado por Jocemar Flores em 21/10/18
--->
+<!-- Projeto GitHub: https://github.com/jccamargo15/projeto-web2 -->
 <?php 
 // liga e desliga exibição dos erros e warnings
 $show_errors_and_warnings = 0;

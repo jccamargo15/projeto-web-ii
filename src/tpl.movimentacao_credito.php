@@ -1,5 +1,4 @@
-<!-- criado por Jocemar Filho em 21/10/18 
--->
+<!-- Projeto GitHub: https://github.com/jccamargo15/projeto-web2 -->
 <?php
   include_once('class/class.Movimentacao.php');
   include_once('class/class.MovimentacaoDAO.php');

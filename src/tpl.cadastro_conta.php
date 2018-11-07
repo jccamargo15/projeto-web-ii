@@ -1,5 +1,4 @@
-<!-- atualizado por Jocemar Filho
-    em 14/10/18 -->
+<!-- Projeto GitHub: https://github.com/jccamargo15/projeto-web2 -->
 <?php
   include_once('class/class.Contas.php');
   include_once('class/class.ContasDAO.php');

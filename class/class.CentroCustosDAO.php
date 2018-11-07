@@ -1,10 +1,4 @@
- <!--
- * criado por José Carlos de camargo
- * em 04/10/2018
- * alterado por Jocemar Flores
- * em 14/10/2018
- -->
-
+<!-- Projeto GitHub: https://github.com/jccamargo15/projeto-web2 -->
 <?php 
 include_once($_SERVER['DOCUMENT_ROOT']."/projeto-web2/inc/class.DbAdmin.php");
 //require_once '../class/class.DbAdmin.php';

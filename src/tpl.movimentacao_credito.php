@@ -172,9 +172,32 @@
   <div class="row">
     <div class="order-md-1">
       <form action="">
-        <div>
-          <label for="datafiltro">Data</label>
-            <input type="date" class="form-control" name="data" id="data" placeholder="" value="" required>
+        <div class="form-row">
+          <div class="col-md-6 mb-3">
+            <label for="dataFiltro">Mês</label>
+              <select class="form-control" name="mesFiltro" id="">
+                <option value="1">Janeiro</option>
+                <option value="2">Fevereiro</option>
+                <option value="3">Março</option>
+                <option value="4">Abril</option>
+                <option value="5">Maio</option>
+                <option value="6">Junho</option>
+                <option value="7">Julho</option>
+                <option value="8">Agosto</option>
+                <option value="9">Setembro</option>
+                <option value="10">Outubro</option>
+                <option value="11">Novembro</option>
+                <option value="12">Dezembro</option>
+              </select>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="anoFiltro">Ano</label>
+            <select class="form-control" name="anoFiltro" id="">
+              <option value="2017">2017</option>
+              <option value="2018" selected>2018</option>
+              <option value="2019">2019</option>
+            </select>
+          </div>
         </div>
       </form>
     </div>

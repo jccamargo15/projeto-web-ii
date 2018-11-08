@@ -5,7 +5,7 @@
 	require_once('../class/class.MovimentacaoDAO.php');
 
 
-	if( $_GET['acao']=='excluir'){
+	if(isset($_GET['acao']) && !empty($_GET['acao']) && $_GET['acao']=='excluir'){
 		$tipo = $_GET['tipo'];
 
 		$movimentacao = new Movimentacao();

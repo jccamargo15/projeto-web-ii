@@ -86,7 +86,7 @@
 
           <div class="col-md-6 mb-3">
             <label for="firstName">Valor</label>
-            <input type="text" class="form-control" name="valor" id="valor" placeholder="" value="<?php echo $vetor[0]->getValor() ?>" required>
+            <input type="text" class="form-control" name="valor" id="valor" placeholder="" value="<?php echo $vetor[0]->getValor() ?>" onKeyPress="return(moeda(this,'.',',',event))" required>
           </div>
 
           <div class="col-md-12 mb-3">
@@ -147,7 +147,7 @@
 
           <div class="col-md-6 mb-3">
             <label for="firstName">Valor</label>
-            <input type="text" class="form-control" name="valor" id="valor" placeholder="" value="" required>
+            <input type="text" class="form-control" name="valor" id="valor" placeholder="" value="" onKeyPress="return(moeda(this,'.',',',event))" required>
           </div>
 
           <div class="col-md-12 mb-3">

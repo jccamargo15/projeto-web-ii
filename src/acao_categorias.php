@@ -4,7 +4,7 @@
 	require_once('../class/class.CentroCustos.php');
 	require_once('../class/class.CentroCustosDAO.php');
 
-	if( $_GET['acao']=='excluir'){
+	if(isset($_GET['acao']) && !empty($_GET['acao']) && $_GET['acao']=='excluir'){
 
 		$CentroCustos = new CentroCustos();
 		$CentroCustos->setId($_GET['id']);

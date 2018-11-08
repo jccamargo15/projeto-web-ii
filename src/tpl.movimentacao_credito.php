@@ -168,6 +168,19 @@
 
 <hr class="mb-4">
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="order-md-1">
+      <form action="">
+        <div>
+          <label for="datafiltro">Data</label>
+            <input type="date" class="form-control" name="data" id="data" placeholder="" value="" required>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 <div class="table-responsive">
   <table class="table table-striped table-sm">
     <thead>

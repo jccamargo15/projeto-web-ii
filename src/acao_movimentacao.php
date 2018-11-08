@@ -4,6 +4,11 @@
 	require_once('../class/class.Movimentacao.php');
 	require_once('../class/class.MovimentacaoDAO.php');
 
+	function limpa_moeda($valor) {
+		$valor = str_replace(".", "", $valor);
+		$valor = str_replace(",", ".", $valor);
+		return $valor;
+	}
 
 	if(isset($_GET['acao']) && !empty($_GET['acao']) && $_GET['acao']=='excluir'){
 		$tipo = $_GET['tipo'];
@@ -36,7 +41,8 @@
 			$movimentacao->setTipoMov($_POST['tipo_mov']);
 			$movimentacao->setData($_POST['data']);
 			$movimentacao->setDescricao($_POST['descricao']);
-			$movimentacao->setValor($_POST['valor']);
+			$valor = limpa_moeda($_POST['valor']);
+			$movimentacao->setValor($valor);
 					
 			$movimentacaoDAO = new MovimentacaoDAO();
 			$movimentacaoDAO->cadastra($movimentacao);
@@ -71,7 +77,8 @@
 			$movimentacao->setTipoMov($_POST['tipo_mov']);
 			$movimentacao->setData($_POST['data']);
 			$movimentacao->setDescricao($_POST['descricao']);
-			$movimentacao->setValor($_POST['valor']);
+			$valor = limpa_moeda($_POST['valor']);
+			$movimentacao->setValor($valor);
 
 			$movimentacaoDAO = new MovimentacaoDAO();
 			$movimentacaoDAO->atualiza($movimentacao);

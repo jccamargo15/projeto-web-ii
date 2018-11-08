@@ -5,6 +5,10 @@
   include_once('class/class.ContasDAO.php');
   include_once('class/class.CentroCustosDAO.php');
 
+  function monta_moeda($valor) {
+    $valor = number_format($valor, 2, ',', '.');
+    return $valor;
+  }
 
   if( isset($_GET['confirm']) and !empty($_GET['confirm']) ){
     if($_GET['confirm'] == 1){
@@ -86,7 +90,7 @@
 
           <div class="col-md-6 mb-3">
             <label for="firstName">Valor</label>
-            <input type="text" class="form-control" name="valor" id="valor" placeholder="" value="<?php echo $vetor[0]->getValor() ?>" onKeyPress="return(moeda(this,'.',',',event))" required>
+            <input type="text" class="form-control" name="valor" id="valor" placeholder="" value="<?php echo monta_moeda($vetor[0]->getValor()); ?>" onKeyPress="return(moeda(this,'.',',',event))" required>
           </div>
 
           <div class="col-md-12 mb-3">

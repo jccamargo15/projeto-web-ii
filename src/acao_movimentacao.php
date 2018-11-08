@@ -3,6 +3,7 @@
 	
 	require_once('../class/class.Movimentacao.php');
 	require_once('../class/class.MovimentacaoDAO.php');
+	require_once('../class/class.Log.php');
 
 
 	if(isset($_GET['acao']) && !empty($_GET['acao']) && $_GET['acao']=='excluir'){
@@ -30,6 +31,7 @@
 		if( $_POST['acao']=='inserir'){
 
 			$movimentacao = new Movimentacao();
+			$log = new Log();
 
 			$movimentacao->setIdCentroCustos($_POST['id_centro_custos']);
 			$movimentacao->setIdConta($_POST['id_conta']);
@@ -41,14 +43,13 @@
 			$movimentacaoDAO = new MovimentacaoDAO();
 			$movimentacaoDAO->cadastra($movimentacao);
 
-			$arq = '../log/log_movimentacao.txt';
+			//registrar movimentação no arquivo de Log
 			$msg = '['. date("d/m/Y H:i:s").'] - ';
 			$msg .= $movimentacao->getTipoMov() .' - ';
 			$msg .= 'R$ '. $movimentacao->getValor();
 			$msg .= PHP_EOL;
-			$fo = fopen($arq, 'a'); 
-			fwrite($fo, $msg);
-			fclose($fo);
+			$log->abrirArquivo();
+			$log->escreverArquivo($msg);
 
 			if($_POST['tipo_mov'] == 'credito'){
 				header("Location: ../index.php?page=movimentacao_credito&confirm=1");

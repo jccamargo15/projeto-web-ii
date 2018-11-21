@@ -168,9 +168,58 @@
 
 <?php
   }
+  if (isset($_POST['mesFiltro']) && !empty($_POST['mesFiltro'])) {
+    $mes = $_POST['mesFiltro'];
+  } else {
+    $mes = date("m");
+  }
+  if (isset($_POST['anoFiltro']) && !empty($_POST['anoFiltro'])) {
+    $ano = $_POST['anoFiltro'];
+  } else {
+    $ano = date("Y");
+  }
 ?>
 
 <hr class="mb-4">
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <form action="?page=movimentacao_debito" method="post">
+        <div class="form-row">
+          <div class="col-md-4 mb-3">
+            <label for="dataFiltro">Mês</label>
+              <select class="form-control" name="mesFiltro" id="">
+                <option value="1" <?php if ($mes=='1') {echo 'selected';} ?>>Janeiro</option>
+                <option value="2" <?php if ($mes=='2') {echo 'selected';} ?>>Fevereiro</option>
+                <option value="3" <?php if ($mes=='3') {echo 'selected';} ?>>Março</option>
+                <option value="4" <?php if ($mes=='4') {echo 'selected';} ?>>Abril</option>
+                <option value="5" <?php if ($mes=='5') {echo 'selected';} ?>>Maio</option>
+                <option value="6" <?php if ($mes=='6') {echo 'selected';} ?>>Junho</option>
+                <option value="7" <?php if ($mes=='7') {echo 'selected';} ?>>Julho</option>
+                <option value="8" <?php if ($mes=='8') {echo 'selected';} ?>>Agosto</option>
+                <option value="9" <?php if ($mes=='9') {echo 'selected';} ?>>Setembro</option>
+                <option value="10" <?php if ($mes=='10') {echo 'selected';} ?>>Outubro</option>
+                <option value="11" <?php if ($mes=='11') {echo 'selected';} ?>>Novembro</option>
+                <option value="12" <?php if ($mes=='12') {echo 'selected';} ?>>Dezembro</option>
+              </select>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="anoFiltro">Ano</label>
+            <select class="form-control" name="anoFiltro" id="">
+              <option value="2017" <?php if ($ano=='2017') {echo 'selected';} ?>>2017</option>
+              <option value="2018" <?php if ($ano=='2018') {echo 'selected';} ?>>2018</option>
+              <option value="2019" <?php if ($ano=='2019') {echo 'selected';} ?>>2019</option>
+            </select>
+          </div>
+          <div class="col-md-4 mb-3" style="padding-top: 28px;">
+            <button class="btn btn-primary" type="submit">Filtrar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 <div class="table-responsive">
   <table class="table table-striped table-sm">
@@ -188,7 +237,7 @@
     <?php
 
     $tipo = 'debito';
-    $lista = $movimentacaoDAO->lista($tipo);
+    $lista = $movimentacaoDAO->lista($tipo, $mes, $ano);
       if($lista != 0){
         foreach ($lista as $i =>$val) {
           echo '<tr>';

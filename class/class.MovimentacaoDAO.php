@@ -45,7 +45,7 @@ class MovimentacaoDAO
 	}
 
 
-	public function lista($tipo)
+	public function lista($tipo, $mes, $ano)
 	{
 		$dba = $this->dba;
 
@@ -53,9 +53,7 @@ class MovimentacaoDAO
 		$query = 'SELECT movimentacao.id, movimentacao.tipo_mov, movimentacao.data, movimentacao.descricao, 
 						movimentacao.valor, contas.nome, centro_custos.nome, DATE_FORMAT(data,"%d/%m/%Y") as data_formatada, FORMAT(valor, 2, "de_DE") as valor_formatado
 				  FROM movimentacao, contas, centro_custos
-				  WHERE movimentacao.id_conta = contas.id 
-				        AND movimentacao.id_centro_custos = centro_custos.id 
-				        AND movimentacao.tipo_mov = "'.$tipo.'"';
+				  WHERE movimentacao.id_conta = contas.id AND movimentacao.id_centro_custos = centro_custos.id AND movimentacao.tipo_mov = "'.$tipo.'" AND movimentacao.data LIKE "'.$ano.'-'.$mes.'-%"';
 
 		$res = $dba->query($query);
 

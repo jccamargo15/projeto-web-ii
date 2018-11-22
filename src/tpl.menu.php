@@ -50,10 +50,22 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link <?php if ($page=='relatorios') {echo 'active';} ?>" href="?page=relatorios">
+                <a class="nav-link href="#">
                     <span data-feather="bar-chart-2"></span>
                     Relatórios
                 </a>
+                <ul>
+                    <li class="nav-subitem">
+                        <a class="nav-link <?php if ($page=='relatorio_categoria') {echo 'active';} ?>" href="?page=relatorio_categoria">
+                            <span data-feather="plus-square"></span>Categorias
+                        </a>
+                    </li>
+                    <li class="nav-subitem">
+                        <a class="nav-link <?php if ($page=='relatorio_extrato') {echo 'active';} ?>" href="?page=relatorio_extrato">
+                            <span data-feather="minus-square"></span>Extrato
+                        </a>
+                    </li>
+                </ul>
             </li>
 
         </ul>

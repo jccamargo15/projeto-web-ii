@@ -27,12 +27,12 @@ if (isset($_POST['carteiraFiltro']) && !empty($_POST['carteiraFiltro'])) {
 
 $contasDAO = new ContasDAO();
 ?>
-<h1>Relatório Categoria</h1>
+<h1>Extrato</h1>
 
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
-      <form action="?page=relatorio_categoria" method="post">
+      <form action="?page=relatorio_extrato" method="post">
         <div class="form-row">
         	<!-- <div class="col-md-3 mb-3">
         		<label for="tipoFiltro">Tipo</label>
@@ -89,7 +89,8 @@ $contasDAO = new ContasDAO();
 
 echo '<br>';
 // print_r(extratoCatetoria($tipo, $mes, $ano, $carteira));
-$lista = extratoCatetoria('debito', $mes, $ano, $carteira); 
+$anterior = extratoAnterior('debito', $mes, $ano, $carteira); 
+$atual = extratoAtual('debito', $mes, $ano, $carteira); 
 // while ($lista = mysql_fetch_assoc($lista)) {
 // 	$lista['tipo_mov'];
 // 	$lista['data'];
@@ -103,81 +104,25 @@ echo '<br>';
 
 <h3>Débito</h3>
 
-<div class="table-responsive">
-  <table class="table table-striped table-sm">
-    <thead>
-      <tr>
-        <th>CATEGORIA</th>
-        <th>VALOR</th>
-        <!-- <th>DESCRIÇÃO</th> -->
-        <!-- <th>DATA</th> -->
-        <!-- <th>CONTA</th> -->
-      </tr>
-    </thead>
-    <tbody>
-    <?php
+<?php
 
-    // $tipo = 'debito';
-    // $lista = $movimentacaoDAO->lista($tipo, $mes, $ano);
-      if($lista != 0){
-        foreach ($lista as $i =>$val) {
-          echo '<tr>';
-            echo '<td>'. $lista[$i]['nome'] .'</td>';
-            echo '<td>'. $lista[$i]['soma'] .'</td>';
-            // echo '<td>'. $lista[$i]['descricao'] .'</td>';
-            // echo '<td>'. $lista[$i]['data'] .'</td>';
-            // echo '<td>'. $lista[$i]['id'] .'</td>';
-            // echo '<td>'. $lista[$i]['tipo_mov'] .'</td>';
-            // echo '<td>'. $lista[$i]['conta'] .'</td>';
-          echo '</tr>';
-        }
-      }else{
-        echo 'Nenhum registro encontrado!';
-      }
-    ?>
-  </tbody>
-  </table>
+echo '<h4>R$ ' . ($anterior[0]['soma'] + $atual[0]['soma']) . '</h4>';
+
+?>
 
 <?php
-$lista = extratoCatetoria('credito', $mes, $ano, $carteira); 
+$anterior = extratoAnterior('credito', $mes, $ano, $carteira); 
+$atual = extratoAtual('credito', $mes, $ano, $carteira); 
 ?>
 
 <h3>Crédito</h3>
 
-<div class="table-responsive">
-  <table class="table table-striped table-sm">
-    <thead>
-      <tr>
-        <th>CATEGORIA</th>
-        <th>VALOR</th>
-        <!-- <th>DESCRIÇÃO</th> -->
-        <!-- <th>DATA</th> -->
-        <!-- <th>CONTA</th> -->
-      </tr>
-    </thead>
-    <tbody>
-    <?php
+<?php
 
-    // $tipo = 'debito';
-    // $lista = $movimentacaoDAO->lista($tipo, $mes, $ano);
-      if($lista != 0){
-        foreach ($lista as $i =>$val) {
-          echo '<tr>';
-            echo '<td>'. $lista[$i]['nome'] .'</td>';
-            echo '<td>'. $lista[$i]['soma'] .'</td>';
-            // echo '<td>'. $lista[$i]['descricao'] .'</td>';
-            // echo '<td>'. $lista[$i]['data'] .'</td>';
-            // echo '<td>'. $lista[$i]['id'] .'</td>';
-            // echo '<td>'. $lista[$i]['tipo_mov'] .'</td>';
-            // echo '<td>'. $lista[$i]['conta'] .'</td>';
-          echo '</tr>';
-        }
-      }else{
-        echo 'Nenhum registro encontrado!';
-      }
-    ?>
-  </tbody>
-  </table>
+echo '<h4>R$ ' . ($anterior[0]['soma'] + $atual[0]['soma']) . '</h4>';
+
+?>
+
 
   <hr class="mb-4">
   <footer class="my-5 pt-5 text-muted text-center text-small">

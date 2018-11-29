@@ -89,8 +89,8 @@ $contasDAO = new ContasDAO();
 
 echo '<br>';
 // print_r(extratoCatetoria($tipo, $mes, $ano, $carteira));
-$anterior = extratoAnterior('debito', $mes, $ano, $carteira); 
-$atual = extratoAtual('debito', $mes, $ano, $carteira); 
+$debitoAnterior = extratoAnterior('debito', $mes, $ano, $carteira); 
+$debitoAtual = extratoAtual('debito', $mes, $ano, $carteira); 
 // while ($lista = mysql_fetch_assoc($lista)) {
 // 	$lista['tipo_mov'];
 // 	$lista['data'];
@@ -102,26 +102,66 @@ echo '<br>';
 ?>
 
 
-<h3>Débito</h3>
+<!-- <h3>Débito</h3> -->
 
 <?php
 
-echo '<h4>R$ ' . ($anterior[0]['soma'] + $atual[0]['soma']) . '</h4>';
+// echo '<h4>R$ ' . ($debitoAnterior[0]['soma'] + $debitoAtual[0]['soma']) . '</h4>';
 
 ?>
 
 <?php
-$anterior = extratoAnterior('credito', $mes, $ano, $carteira); 
-$atual = extratoAtual('credito', $mes, $ano, $carteira); 
+$creditoAnterior = extratoAnterior('credito', $mes, $ano, $carteira); 
+$creditoAtual = extratoAtual('credito', $mes, $ano, $carteira); 
+
 ?>
 
-<h3>Crédito</h3>
+<!-- <h3>Crédito</h3> -->
 
 <?php
 
-echo '<h4>R$ ' . ($anterior[0]['soma'] + $atual[0]['soma']) . '</h4>';
+// echo '<h4>R$ ' . ($creditoAnterior[0]['soma'] + $creditoAtual[0]['soma']) . '</h4>';
+
+echo '<h5>Saldo anterior: R$ ' . ($creditoAnterior[0]['soma'] - $debitoAnterior[0]['soma']).'</h5>';
+echo '<br>';
+echo '<h5>Saldo atual: R$ ' . (($creditoAnterior[0]['soma'] - $debitoAnterior[0]['soma'])+($creditoAtual[0]['soma'] - $debitoAtual[0]['soma'])).'</h5>';
 
 ?>
+
+<table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th>CATEGORIA</th>
+        <th>DESCRIÇÃO</th>
+        <th>TIPO</th>
+        <th>DATA</th>
+        <th>VALOR</th>
+        <!-- <th>CONTA</th> -->
+      </tr>
+    </thead>
+    <tbody>
+    <?php
+
+    // $tipo = 'debito';
+    $lista = extrato($mes, $ano, $carteira);
+      if($lista != 0){
+        foreach ($lista as $i =>$val) {
+          echo '<tr>';
+            echo '<td>'. $lista[$i]['nome'] .'</td>';
+            echo '<td>'. $lista[$i]['descricao'] .'</td>';
+            echo '<td>'. $lista[$i]['tipo_mov'] .'</td>';
+            echo '<td>'. $lista[$i]['data'] .'</td>';
+            echo '<td>'. $lista[$i]['valor'] .'</td>';
+            // echo '<td>'. $lista[$i]['id'] .'</td>';
+            // echo '<td>'. $lista[$i]['conta'] .'</td>';
+          echo '</tr>';
+        }
+      }else{
+        echo 'Nenhum registro encontrado!';
+      }
+    ?>
+  </tbody>
+  </table>
 
 
   <hr class="mb-4">

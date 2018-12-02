@@ -2,6 +2,8 @@
 include_once 'src/acao_relatorio.php';
 include_once 'class/class.Contas.php';
 include_once 'class/class.ContasDAO.php';
+include_once 'class/class.Relatorio.php';
+include_once 'class/class.RelatorioDAO.php';
 
 if (isset($_POST['mesFiltro']) && !empty($_POST['mesFiltro'])) {
 	$mes = $_POST['mesFiltro'];
@@ -25,7 +27,8 @@ if (isset($_POST['carteiraFiltro']) && !empty($_POST['carteiraFiltro'])) {
 	$carteira = 1;
 }
 
-$contasDAO = new ContasDAO();
+$contasDAO    = new ContasDAO();
+$relatorioDAO = new RelatorioDAO();
 ?>
 <h1>Relatório Categoria</h1>
 
@@ -89,7 +92,7 @@ $contasDAO = new ContasDAO();
 
 echo '<br>';
 // print_r(extratoCatetoria($tipo, $mes, $ano, $carteira));
-$lista = extratoCatetoria('debito', $mes, $ano, $carteira); 
+$lista = $relatorioDAO->extratoCatetoria('debito', $mes, $ano, $carteira);
 // while ($lista = mysql_fetch_assoc($lista)) {
 // 	$lista['tipo_mov'];
 // 	$lista['data'];
@@ -122,8 +125,8 @@ echo '<br>';
       if($lista != 0){
         foreach ($lista as $i =>$val) {
           echo '<tr>';
-            echo '<td>'. $lista[$i]['nome'] .'</td>';
-            echo '<td>'. $lista[$i]['soma'] .'</td>';
+            echo '<td>'. $lista[$i]->getCategoria() .'</td>';
+            echo '<td>'. $lista[$i]->getSoma() .'</td>';
             // echo '<td>'. $lista[$i]['descricao'] .'</td>';
             // echo '<td>'. $lista[$i]['data'] .'</td>';
             // echo '<td>'. $lista[$i]['id'] .'</td>';
@@ -139,7 +142,7 @@ echo '<br>';
   </table>
 
 <?php
-$lista = extratoCatetoria('credito', $mes, $ano, $carteira); 
+$lista = $relatorioDAO->extratoCatetoria('credito', $mes, $ano, $carteira);
 ?>
 
 <h3>Crédito</h3>
@@ -163,8 +166,8 @@ $lista = extratoCatetoria('credito', $mes, $ano, $carteira);
       if($lista != 0){
         foreach ($lista as $i =>$val) {
           echo '<tr>';
-            echo '<td>'. $lista[$i]['nome'] .'</td>';
-            echo '<td>'. $lista[$i]['soma'] .'</td>';
+            echo '<td>'. $lista[$i]->getCategoria() .'</td>';
+            echo '<td>'. $lista[$i]->getSoma() .'</td>';
             // echo '<td>'. $lista[$i]['descricao'] .'</td>';
             // echo '<td>'. $lista[$i]['data'] .'</td>';
             // echo '<td>'. $lista[$i]['id'] .'</td>';
@@ -178,6 +181,13 @@ $lista = extratoCatetoria('credito', $mes, $ano, $carteira);
     ?>
   </tbody>
   </table>
+
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
 
 <?php include 'tpl.footer.php'; ?>
 </div>

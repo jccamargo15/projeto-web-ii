@@ -142,4 +142,6 @@
       </tr>
     </tbody>
   </table>
+
+  <?php include 'tpl.footer.php'; ?>
 </div>

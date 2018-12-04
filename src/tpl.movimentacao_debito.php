@@ -190,15 +190,15 @@
           <div class="col-md-4 mb-3">
             <label for="dataFiltro">Mês</label>
               <select class="form-control" name="mesFiltro" id="">
-                <option value="1" <?php if ($mes=='1') {echo 'selected';} ?>>Janeiro</option>
-                <option value="2" <?php if ($mes=='2') {echo 'selected';} ?>>Fevereiro</option>
-                <option value="3" <?php if ($mes=='3') {echo 'selected';} ?>>Março</option>
-                <option value="4" <?php if ($mes=='4') {echo 'selected';} ?>>Abril</option>
-                <option value="5" <?php if ($mes=='5') {echo 'selected';} ?>>Maio</option>
-                <option value="6" <?php if ($mes=='6') {echo 'selected';} ?>>Junho</option>
-                <option value="7" <?php if ($mes=='7') {echo 'selected';} ?>>Julho</option>
-                <option value="8" <?php if ($mes=='8') {echo 'selected';} ?>>Agosto</option>
-                <option value="9" <?php if ($mes=='9') {echo 'selected';} ?>>Setembro</option>
+                <option value="01" <?php if ($mes=='01') {echo 'selected';} ?>>Janeiro</option>
+                <option value="02" <?php if ($mes=='02') {echo 'selected';} ?>>Fevereiro</option>
+                <option value="03" <?php if ($mes=='03') {echo 'selected';} ?>>Março</option>
+                <option value="04" <?php if ($mes=='04') {echo 'selected';} ?>>Abril</option>
+                <option value="05" <?php if ($mes=='05') {echo 'selected';} ?>>Maio</option>
+                <option value="06" <?php if ($mes=='06') {echo 'selected';} ?>>Junho</option>
+                <option value="07" <?php if ($mes=='07') {echo 'selected';} ?>>Julho</option>
+                <option value="08" <?php if ($mes=='08') {echo 'selected';} ?>>Agosto</option>
+                <option value="09" <?php if ($mes=='09') {echo 'selected';} ?>>Setembro</option>
                 <option value="10" <?php if ($mes=='10') {echo 'selected';} ?>>Outubro</option>
                 <option value="11" <?php if ($mes=='11') {echo 'selected';} ?>>Novembro</option>
                 <option value="12" <?php if ($mes=='12') {echo 'selected';} ?>>Dezembro</option>

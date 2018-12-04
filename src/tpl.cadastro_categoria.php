@@ -92,10 +92,10 @@
         foreach ($lista as $i =>$val) {
           echo '<tr>';
             echo '<td>'. $lista[$i]->getNome() .'</td>';
-            echo '<td> 
-              <a href= "index.php?page=cadastro_categoria&editar=1&id='. $lista[$i]->getId() .'&acao=editar"><img width="24px" heigth="24px" src="img/edit.png"></a>
-              <a href= "src/acao_categorias.php?id='. $lista[$i]->getId() .'&acao=excluir"><img width="24px" heigth="244px" src="img/delete.png"></a>
-            </td>';
+            echo '<td>';
+            echo '<a href= "index.php?page=cadastro_categoria&editar=1&id='. $lista[$i]->getId() .'&acao=editar"><img width="24px" heigth="24px" src="img/edit.png"></a>';
+            // echo '<a href= "src/acao_categorias.php?id='. $lista[$i]->getId() .'&acao=excluir"><img width="24px" heigth="244px" src="img/delete.png"></a>';
+            echo '</td>';
 
           echo '</tr>';
         }

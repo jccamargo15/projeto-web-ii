@@ -11,6 +11,7 @@
 
 		private $data;
 		private $soma;
+		private $valor;
 		private $categoria;
 		private $descricao;
 		
@@ -47,6 +48,11 @@
 		public function setSoma($soma)
 		{
 			$this->soma = $soma;
+		}
+
+		public function setValor($valor)
+		{
+			$this->valor = $valor;
 		}
 
 		public function setCategoria($categoria)
@@ -87,6 +93,11 @@
 		public function getSoma()
 		{
 			return $this->soma;
+		}
+
+		public function getValor()
+		{
+			return $this->valor;
 		}
 
 		public function getCategoria()

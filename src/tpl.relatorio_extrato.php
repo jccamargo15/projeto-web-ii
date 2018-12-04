@@ -1,7 +1,9 @@
 <?php 
-include_once 'src/acao_relatorio.php';
+//include_once 'src/acao_relatorio.php';
 include_once 'class/class.Contas.php';
 include_once 'class/class.ContasDAO.php';
+include_once 'class/class.Relatorio.php';
+include_once 'class/class.RelatorioDAO.php';
 
 if (isset($_POST['mesFiltro']) && !empty($_POST['mesFiltro'])) {
 	$mes = $_POST['mesFiltro'];
@@ -26,6 +28,7 @@ if (isset($_POST['carteiraFiltro']) && !empty($_POST['carteiraFiltro'])) {
 }
 
 $contasDAO = new ContasDAO();
+$relatorioDAO = new RelatorioDAO();
 ?>
 <h1>Extrato</h1>
 
@@ -88,43 +91,24 @@ $contasDAO = new ContasDAO();
 <?php 
 
 echo '<br>';
-// print_r(extratoCatetoria($tipo, $mes, $ano, $carteira));
-$debitoAnterior = extratoAnterior('debito', $mes, $ano, $carteira); 
-$debitoAtual = extratoAtual('debito', $mes, $ano, $carteira); 
-// while ($lista = mysql_fetch_assoc($lista)) {
-// 	$lista['tipo_mov'];
-// 	$lista['data'];
-// 	$lista['soma'];
-// 	$lista['conta'];
-// }
+
+$debitoAnterior = $relatorioDAO->extratoAnterior('debito', $mes, $ano, $carteira); 
+$saldoDebitoAnterior = $debitoAnterior[0]->getSoma();
+$creditoAnterior = $relatorioDAO->extratoAnterior('credito', $mes, $ano, $carteira); 
+$saldoCreditoAnterior = $creditoAnterior[0]->getSoma();
+$saldoAnterior = $saldoCreditoAnterior - $saldoDebitoAnterior;
+
 echo '<br>';
 
-?>
+$debitoAtual = $relatorioDAO->extratoAtual('debito', $mes, $ano, $carteira); 
+$saldoDebitoAtual  = $debitoAtual[0]->getSoma();
+$creditoAtual = $relatorioDAO->extratoAtual('credito', $mes, $ano, $carteira); 
+$saldoCreditoAtual = $creditoAtual[0]->getSoma();
+$saltoAtual = $saldoCreditoAtual - $saldoDebitoAtual;
 
-
-<!-- <h3>Débito</h3> -->
-
-<?php
-
-// echo '<h4>R$ ' . ($debitoAnterior[0]['soma'] + $debitoAtual[0]['soma']) . '</h4>';
-
-?>
-
-<?php
-$creditoAnterior = extratoAnterior('credito', $mes, $ano, $carteira); 
-$creditoAtual = extratoAtual('credito', $mes, $ano, $carteira); 
-
-?>
-
-<!-- <h3>Crédito</h3> -->
-
-<?php
-
-// echo '<h4>R$ ' . ($creditoAnterior[0]['soma'] + $creditoAtual[0]['soma']) . '</h4>';
-
-echo '<h5>Saldo anterior: R$ ' . ($creditoAnterior[0]['soma'] - $debitoAnterior[0]['soma']).'</h5>';
+echo '<h5>Saldo anterior: R$ ' . $saldoAnterior .'</h5>';
 echo '<br>';
-echo '<h5>Saldo atual: R$ ' . (($creditoAnterior[0]['soma'] - $debitoAnterior[0]['soma'])+($creditoAtual[0]['soma'] - $debitoAtual[0]['soma'])).'</h5>';
+
 
 ?>
 
@@ -143,17 +127,16 @@ echo '<h5>Saldo atual: R$ ' . (($creditoAnterior[0]['soma'] - $debitoAnterior[0]
     <?php
 
     // $tipo = 'debito';
-    $lista = extrato($mes, $ano, $carteira);
+    $lista = $relatorioDAO->extrato($mes, $ano, $carteira);
       if($lista != 0){
         foreach ($lista as $i =>$val) {
           echo '<tr>';
-            echo '<td>'. $lista[$i]['nome'] .'</td>';
-            echo '<td>'. $lista[$i]['descricao'] .'</td>';
-            echo '<td>'. $lista[$i]['tipo_mov'] .'</td>';
-            echo '<td>'. $lista[$i]['data'] .'</td>';
-            echo '<td>'. $lista[$i]['valor'] .'</td>';
-            // echo '<td>'. $lista[$i]['id'] .'</td>';
-            // echo '<td>'. $lista[$i]['conta'] .'</td>';
+            echo '<td>'. $lista[$i]->getCategoria() .'</td>';
+            echo '<td>'. $lista[$i]->getDescricao() .'</td>';
+            echo '<td>'. $lista[$i]->getTipo() .'</td>';
+            echo '<td>'. $lista[$i]->getData() .'</td>';
+            echo '<td>'. $lista[$i]->getValor() .'</td>';
+
           echo '</tr>';
         }
       }else{
@@ -162,6 +145,10 @@ echo '<h5>Saldo atual: R$ ' . (($creditoAnterior[0]['soma'] - $debitoAnterior[0]
     ?>
   </tbody>
   </table>
+
+
   
-<?php include 'tpl.footer.php'; ?>
+<?php 
+echo '<h5>Saldo atual: R$ ' . ($saldoAnterior + $saltoAtual) . '</h5>';
+include 'tpl.footer.php'; ?>
 </div>

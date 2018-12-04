@@ -1,5 +1,5 @@
 <?php 
-include_once 'src/acao_relatorio.php';
+//include_once 'src/acao_relatorio.php';
 include_once 'class/class.Contas.php';
 include_once 'class/class.ContasDAO.php';
 include_once 'class/class.Relatorio.php';

@@ -1,16 +1,9 @@
-<!-- criado por Jocemar Flores em 14/10/18
-	 atualizado por Jocemar Flores em 21/10/18
- -->
- 
+<!-- Projeto GitHub: https://github.com/jccamargo15/projeto-web2 -->
 <?php 
 
 include_once($_SERVER['DOCUMENT_ROOT']."/projeto-web2/inc/class.DbAdmin.php");
 require_once 'class.Movimentacao.php';
 
-/**
- * criado por José Carlos de camargo
- * em 04/10/2018
- */
 class MovimentacaoDAO
 {
 	private $dba;

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 02-Nov-2018 às 00:26
--- Versão do servidor: 10.1.30-MariaDB
--- PHP Version: 5.6.33
+-- Generation Time: 05-Dez-2018 às 00:56
+-- Versão do servidor: 10.1.36-MariaDB
+-- versão do PHP: 5.6.38
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -39,9 +39,10 @@ CREATE TABLE `centro_custos` (
 
 INSERT INTO `centro_custos` (`id`, `nome`) VALUES
 (2, 'Moradia'),
-(3, 'CombustÃ­vel'),
 (4, 'SalÃ¡rio'),
-(6, 'AuxÃ­lio Transporte');
+(6, 'Transporte'),
+(7, 'FamÃ­lia'),
+(8, 'Super Mercado');
 
 -- --------------------------------------------------------
 
@@ -59,8 +60,8 @@ CREATE TABLE `contas` (
 --
 
 INSERT INTO `contas` (`id`, `nome`) VALUES
-(1, 'Carteira'),
-(2, 'Banrisul');
+(2, 'Banrisul'),
+(3, 'Caixa Federal');
 
 -- --------------------------------------------------------
 
@@ -101,10 +102,34 @@ CREATE TABLE `movimentacao` (
 --
 
 INSERT INTO `movimentacao` (`id`, `id_centro_custos`, `id_conta`, `tipo_mov`, `data`, `descricao`, `valor`) VALUES
-(2, 6, 2, 'credito', '2018-10-22', 'Passagem Setembro', '200.00'),
-(4, 3, 1, 'debito', '2018-10-15', 'Gasolina', '90.00'),
-(7, 4, 1, 'credito', '2018-11-01', 'SalÃ¡rio setembro', '3000.00'),
-(8, 6, 2, 'debito', '2018-11-01', 'Carro', '50.00');
+(14, 4, 2, 'credito', '2018-09-05', 'SalÃ¡rio da empresa', '2500.00'),
+(15, 4, 2, 'credito', '2018-10-05', 'SalÃ¡rio da empresa', '2500.00'),
+(16, 4, 2, 'credito', '2018-11-05', 'SalÃ¡rio da empresa', '2500.00'),
+(17, 4, 2, 'credito', '2018-12-05', 'SalÃ¡rio da empresa', '2500.00'),
+(18, 4, 2, 'credito', '2019-01-05', 'SalÃ¡rio da empresa', '2500.00'),
+(19, 4, 2, 'credito', '2018-12-20', '2Âº Parcela DÃ©cimo', '1250.00'),
+(20, 4, 2, 'credito', '2018-11-30', '1Âº Parcela DÃ©cimo', '1250.00'),
+(21, 4, 3, 'credito', '2018-12-12', 'BonificaÃ§Ã£o de Natal', '500.00'),
+(22, 4, 3, 'credito', '2019-01-10', 'FÃ©rias', '2000.00'),
+(23, 4, 3, 'credito', '2018-11-16', 'Vendas do brechÃ³', '235.00'),
+(24, 4, 3, 'credito', '2018-10-15', '2Âª Parcela do Site', '1375.00'),
+(25, 4, 3, 'credito', '2018-09-14', '1Âª Parcela do Site', '1375.00'),
+(26, 2, 2, 'debito', '2018-09-10', 'Aluguel', '850.00'),
+(27, 2, 2, 'debito', '2018-10-10', 'Aluguel', '850.00'),
+(28, 2, 2, 'debito', '2018-11-10', 'Aluguel', '850.00'),
+(29, 4, 2, 'debito', '2018-12-10', 'Aluguel', '850.00'),
+(30, 2, 2, 'debito', '2019-01-10', 'Aluguel', '850.00'),
+(31, 7, 2, 'debito', '2018-12-03', 'Uber', '14.65'),
+(32, 6, 2, 'debito', '2018-09-20', 'Gasolina', '155.00'),
+(33, 6, 2, 'debito', '2018-10-20', 'Gasolina', '178.00'),
+(34, 6, 2, 'debito', '2018-11-20', 'Gasolina', '190.00'),
+(35, 6, 2, 'debito', '2018-12-20', 'Gasolina', '225.00'),
+(36, 6, 2, 'debito', '2019-01-20', 'Gasolina', '285.00'),
+(37, 7, 3, 'debito', '2018-09-25', 'Motel', '150.00'),
+(38, 7, 3, 'debito', '2018-10-18', 'Viagem SÃ£o Paulo', '750.00'),
+(39, 7, 3, 'debito', '2018-11-12', 'Vacina Cachorro', '65.00'),
+(40, 7, 3, 'debito', '2018-12-20', 'Presentes Natal', '1550.00'),
+(41, 7, 3, 'debito', '2019-01-07', 'Viagem Praia', '990.00');
 
 -- --------------------------------------------------------
 
@@ -199,13 +224,13 @@ ALTER TABLE `recorrentes`
 -- AUTO_INCREMENT for table `centro_custos`
 --
 ALTER TABLE `centro_custos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `contas`
 --
 ALTER TABLE `contas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `item`
@@ -217,7 +242,7 @@ ALTER TABLE `item`
 -- AUTO_INCREMENT for table `movimentacao`
 --
 ALTER TABLE `movimentacao`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `parcelas`

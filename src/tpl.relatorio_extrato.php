@@ -25,7 +25,7 @@ if (isset($_POST['tipoFiltro']) && !empty($_POST['tipoFiltro'])) {
 if (isset($_POST['carteiraFiltro']) && !empty($_POST['carteiraFiltro'])) {
 	$carteira = $_POST['carteiraFiltro'];
 } else {
-	$carteira = 1;
+	$carteira = 2;
 }
 
 $contasDAO = new ContasDAO();
